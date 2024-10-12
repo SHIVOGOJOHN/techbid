@@ -1,0 +1,16 @@
+streamlit
+streamlit-lottie
+mysql-connector-python
+toml
+smtplib
+email
+pandas
+numpy
+requests
+altair
+joblib
+scikit-learn
+pymongo
+gridfs
+io
+pathlib
