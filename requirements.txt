@@ -2,7 +2,6 @@ streamlit
 streamlit-lottie
 mysql-connector-python
 toml
-email
 pandas
 numpy
 requests
@@ -11,5 +10,3 @@ joblib
 scikit-learn
 pymongo
 gridfs
-io
-pathlib
