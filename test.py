@@ -1,9 +1,7 @@
 import streamlit as st 
-from streamlit_lottie import st_lottie
 import mysql.connector
 from mysql.connector import Error
 import hashlib
-import toml
 import smtplib
 from email.mime.text import MIMEText
 import time
