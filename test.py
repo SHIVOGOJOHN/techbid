@@ -3298,11 +3298,13 @@ def about_us():
 
     # Our Values
     st.subheader('Our Values')
-    st.write("""1. **Transparency**: We believe in clear and honest communication.
+    st.write("""
+    1.**Transparency**: We believe in clear and honest communication.
     
-                2. **Integrity**: We are committed to fair play in all our transactions.
+    2.**Integrity**: We are committed to fair play in all our transactions.
                 
-                3. **Innovation**: We constantly strive to improve our platform for a better user experience.""")
+    3.**Innovation**: We constantly strive to improve our platform for a better user experience.
+    """)
 
     # How It Works
     st.subheader("How It Works")
