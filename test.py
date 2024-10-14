@@ -3282,50 +3282,69 @@ For any inquiries regarding shipping and logistics, feel free to contact our sup
 
 def about_us():
     st.subheader("About Us")
-# Css for the about page 
+
+    # CSS for the about page
     st.markdown(
-    """
-    <style>
-    .about-header {
-        font-size: 40px;
-        font-weight: bold;
-        color: #4CAF50;
-        margin-bottom: 20px;
-    }
-    .about-section {
-        font-size: 18px;
-        margin-bottom: 20px;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
+        """
+        <style>
+        .about-header {
+            font-size: 40px;
+            font-weight: bold;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+        .about-section {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        </style>
+        """, 
+        unsafe_allow_html=True
+    )
+
     # About Page Content
     st.markdown('<div class="about-header">About TechBid</div>', unsafe_allow_html=True)
 
-# Introduction
-    st.markdown('<div class="about-section"><strong>Welcome to TechBid!</strong> We are an innovative online bidding platform dedicated to helping you find the best deals on mobile and computer gadgets. Our mission is to create a fun and engaging environment where users can bid on the latest tech products and save money in the process!</div>', unsafe_allow_html=True)
+    # Introduction
+    st.markdown(
+        '<div class="about-section"><strong>Welcome to TechBid!</strong> We are an innovative online bidding platform dedicated to helping you find the best deals on mobile and computer gadgets. Our mission is to create a fun and engaging environment where users can bid on the latest tech products and save money in the process!</div>', 
+        unsafe_allow_html=True
+    )
 
-# Mission Statement
-    st.markdown('<div class="about-section"><strong>Our Mission:</strong> At TechBid, we aim to revolutionize the way people shop for gadgets. We believe that everyone deserves access to high-quality products at affordable prices, and our platform makes that possible through competitive bidding.</div>', unsafe_allow_html=True)
+    # Mission Statement
+    st.markdown(
+        '<div class="about-section"><strong>Our Mission:</strong> At TechBid, we aim to revolutionize the way people shop for gadgets. We believe that everyone deserves access to high-quality products at affordable prices, and our platform makes that possible through competitive bidding.</div>', 
+        unsafe_allow_html=True
+    )
 
-# Our Values
+    # Our Values
     st.markdown('<div class="about-section"><strong>Our Values:</strong></div>', unsafe_allow_html=True)
     st.markdown('<div class="about-section">1. Transparency: We believe in clear and honest communication.</div>', unsafe_allow_html=True)
     st.markdown('<div class="about-section">2. Integrity: We are committed to fair play in all our transactions.</div>', unsafe_allow_html=True)
     st.markdown('<div class="about-section">3. Innovation: We constantly strive to improve our platform for a better user experience.</div>', unsafe_allow_html=True)
 
-# How It Works
-    st.markdown('<div class="about-section"><strong>How It Works:</strong> Bidding on TechBid is simple! Register for an account, browse our selection of gadgets, and place your bids. The highest bidder wins the item, and we handle the rest!</div>', unsafe_allow_html=True)
+    # How It Works
+    st.markdown(
+        '<div class="about-section"><strong>How It Works:</strong> Bidding on TechBid is simple! Register for an account, browse our selection of gadgets, and place your bids. The highest bidder wins the item, and we handle the rest!</div>', 
+        unsafe_allow_html=True
+    )
 
-# Team Introduction
-    st.markdown('<div class="about-section"><strong>Team Effort:</strong> Our dedicated team of tech enthusiasts and professionals are here to ensure a seamless bidding experience for you.</div>', unsafe_allow_html=True)
+    # Team Introduction
+    st.markdown(
+        '<div class="about-section"><strong>Team Effort:</strong> Our dedicated team of tech enthusiasts and professionals are here to ensure a seamless bidding experience for you.</div>', 
+        unsafe_allow_html=True
+    )
 
-# Join Us
-    st.markdown('<div class="about-section"><strong>Join Us:</strong> Ready to find amazing deals? Sign up today and start bidding on the latest gadgets!</div>', unsafe_allow_html=True)
+    # Join Us
+    st.markdown(
+        '<div class="about-section"><strong>Join Us:</strong> Ready to find amazing deals? Sign up today and start bidding on the latest gadgets!</div>', 
+        unsafe_allow_html=True
+    )
+
     st.markdown("### What Our Users Say:")
     st.markdown("⭐️⭐️⭐️⭐️⭐️  \"TechBid helped me find my dream gadget at an unbeatable price!\" - John Ndirangu.")
     st.markdown("⭐️⭐️⭐️⭐️⭐️  \"I love the thrill of bidding!\" - Sarah Kioko.")
+
 def privacy_policy():
     st.subheader("Our Privacy Policy")
     st.write("---")
