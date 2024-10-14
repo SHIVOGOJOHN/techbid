@@ -3445,7 +3445,7 @@ def main():
             st.video(video_bytes)
 
             with st.expander("**How do I place a bid?**", expanded=True):
-                       st.markdown ( """
+                       st.write( """
                         **From The Sidebar:**
 
                         1. Sign Up                  
