@@ -3419,7 +3419,7 @@ You have the right to:
     st.title("7.Limitation of Liability")
     st.write("To the fb9ullest extent permitted by law,**TechBid Marketplace** shall not be liable for any damages, losses, or expenses arising out of or in connection with your use of the app, including any technical issues, loss of bids, or unauthorized access to your account.")
     st.title("Contact Us")
-    st.markdown("Feel free to emil us: [techbidmarketplace@gmail.com]".)
+    st.write(f"Feel free to email us: {techbidmarketplace@gmail.com}".)
 
 # Categories filters by product code
 def category_filter_phones_tablets(code):
