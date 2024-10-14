@@ -3241,7 +3241,7 @@ def how_works():
              
     3.Auction ends after 72 hours
              
-    4 Visit our **Privacy Policy** page for more details
+    4 Visit our **Privacy Policy** page for more details""")
              
     
     st.write("---")
