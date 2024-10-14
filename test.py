@@ -3290,7 +3290,7 @@ def about_us():
 
 
     # Introduction
-    st.write("Welcome to TechBid!</strong> We are an innovative online bidding platform dedicated to helping you find the best deals on mobile and computer gadgets. Our mission is to create a fun and engaging environment where users can bid on the latest tech products and save money in the process!")
+    st.write("Welcome to TechBid! We are an innovative online bidding platform dedicated to helping you find the best deals on mobile and computer gadgets. Our mission is to create a fun and engaging environment where users can bid on the latest tech products and save money in the process!")
 
     # Mission Statement
     st.subheader('Our Mission')
@@ -3310,9 +3310,7 @@ def about_us():
 
     # Team Introduction
     st.subheader("Team Effort")
-    st.write("Our dedicated team of tech enthusiasts and professionals are here to ensure a seamless bidding experience for you.</div>', 
-        unsafe_allow_html=True
-    )
+    st.write("Our dedicated team of tech enthusiasts and professionals are here to ensure a seamless bidding experience for you.")
     st.write("##")
     
     # Join Us
