@@ -3443,17 +3443,15 @@ def main():
             video_file = open("1012 (1).mp4", "rb")
             video_bytes = video_file.read()
             st.video(video_bytes)
-
             with st.expander("**How do I place a bid?**", expanded=True):
-                       st.write( """
-                        **From The Sidebar:**
-
-                        1. Sign Up                  
-                        2. Review the Privacy Policy
-                        3. Start bidding
-                        
-                    """ )
-
+                       st.write("""
+                          **From The Sidebar:**
+      
+                          1. Sign Up                  
+                          2. Review the Privacy Policy
+                          3. Start bidding
+                      """) 
+                       
             progress_bar = st.progress(0)
             for i in range(100):
                 time.sleep(0.05)
