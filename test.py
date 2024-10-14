@@ -3232,7 +3232,7 @@ def update_user_metrics():
 
 def how_works():
 
-    st.subheader("How To Participate")
+    st.subheader("How It Works")
     st.write("---")
     st.write("""
     1.Sign Up
@@ -3241,7 +3241,7 @@ def how_works():
              
     3.Auction ends after 72 hours
              
-    4 Visit our **Privacy Policy** page for more details""")
+    4.Visit our **Privacy Policy** page for more details""")
              
     
     st.write("---")
@@ -3250,7 +3250,7 @@ def how_works():
 
 **Free Delivery for Select Bids**
              
-Bids placed below Ksh 200 qualify for free delivery within select regions. Our aim is to make winning even more rewarding by covering your delivery costs.
+Bids placed below Ksh 1000 qualify for free delivery within select regions. Our aim is to make winning even more rewarding by covering your delivery costs.
              
 **Nationwide Delivery**
              
@@ -3266,7 +3266,7 @@ Bidders will be notified via email upon winning a bid and when the item has been
 
 **Shipping Fees**
              
-For bids exceeding Ksh 200, shipping fees are calculated based on your location and the size/weight of the item. These charges will be clearly communicated during checkout to ensure transparency.
+For bids exceeding Ksh 1000, shipping fees are calculated based on your location and the size/weight of the item. These charges will be clearly communicated during checkout to ensure transparency.
 
 **International Shipping**
              
@@ -3281,46 +3281,47 @@ For any inquiries regarding shipping and logistics, feel free to contact our sup
 """)
 
 def about_us():
-    st.subheader("About Us")
+    st.Title("About Us")
+    st.write("---")
+ 
 
     # About Page Content
-    st.markdown('<div><strong>About TechBid</strong></div>', unsafe_allow_html=True)
+    st.subheader('About TechBid')
+
 
     # Introduction
-    st.markdown(
-        '<div><strong>Welcome to TechBid!</strong> We are an innovative online bidding platform dedicated to helping you find the best deals on mobile and computer gadgets. Our mission is to create a fun and engaging environment where users can bid on the latest tech products and save money in the process!</div>', 
-        unsafe_allow_html=True
-    )
+    st.write("Welcome to TechBid!</strong> We are an innovative online bidding platform dedicated to helping you find the best deals on mobile and computer gadgets. Our mission is to create a fun and engaging environment where users can bid on the latest tech products and save money in the process!")
 
     # Mission Statement
-    st.markdown(
-        '<div><strong>Our Mission:</strong> At TechBid, we aim to revolutionize the way people shop for gadgets. We believe that everyone deserves access to high-quality products at affordable prices, and our platform makes that possible through competitive bidding.</div>', 
-        unsafe_allow_html=True
-    )
+    st.subheader('Our Mission')
+    st.write("At TechBid, we aim to revolutionize the way people shop for gadgets. We believe that everyone deserves access to high-quality products at affordable prices, and our platform makes that possible through competitive bidding")
 
     # Our Values
-    st.markdown('<div><strong>Our Values:</strong></div>', unsafe_allow_html=True)
-    st.markdown('<div>1. Transparency: We believe in clear and honest communication.</div>', unsafe_allow_html=True)
-    st.markdown('<div>2. Integrity: We are committed to fair play in all our transactions.</div>', unsafe_allow_html=True)
-    st.markdown('<div>3. Innovation: We constantly strive to improve our platform for a better user experience.</div>', unsafe_allow_html=True)
+    st.subheader('Our Values')
+    st.write("""1. **Transparency**: We believe in clear and honest communication.
+    
+                2. **Integrity**: We are committed to fair play in all our transactions.
+                
+                3. **Innovation**: We constantly strive to improve our platform for a better user experience.""")
 
     # How It Works
-    st.markdown(
-        '<div><strong>How It Works:</strong> Bidding on TechBid is simple! Register for an account, browse our selection of gadgets, and place your bids. The highest bidder wins the item, and we handle the rest!</div>', 
-        unsafe_allow_html=True
-    )
+    st.subheader("How It Works")
+    st.write("Bidding on TechBid is simple! Register for an account, browse our selection of gadgets, and place your bids. The highest bidder wins the item, and we handle the rest!")
 
     # Team Introduction
-    st.markdown(
-        '<div><strong>Team Effort:</strong> Our dedicated team of tech enthusiasts and professionals are here to ensure a seamless bidding experience for you.</div>', 
+    st.subheader("Team Effort")
+    st.write("Our dedicated team of tech enthusiasts and professionals are here to ensure a seamless bidding experience for you.</div>', 
         unsafe_allow_html=True
     )
-
+    st.write("##")
+    
     # Join Us
     st.markdown(
         '<div><strong>Join Us:</strong> Ready to find amazing deals? Sign up today and start bidding on the latest gadgets!</div>', 
         unsafe_allow_html=True
     )
+    
+    st.write("##")
 
     st.markdown("### What Our Users Say:")
     st.markdown("⭐️⭐️⭐️⭐️⭐️  \"TechBid helped me find my dream gadget at an unbeatable price!\" - John Ndirangu.")
