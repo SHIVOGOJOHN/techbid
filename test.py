@@ -3452,7 +3452,7 @@ def main():
                         1. Sign Up                  
                         2. Review the 'Privacy Policy'
                         3. Start bidding
-                    """,
+                    """
                     
                 )
 
