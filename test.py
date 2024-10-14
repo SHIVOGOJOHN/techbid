@@ -3345,18 +3345,23 @@ We collect the following types of information:
     st.write("""
 We use the information we collect for the following purposes:
 
--To provide and operate the app and its features (e.g., managing auctions, bids, and payments).
--To communicate with you about your account, auctions, and updates to our services.
--To enhance the user experience by analyzing app usage and trends.
--To process payments and refunds.
--To comply with legal obligations.
+1.To provide and operate the app and its features (e.g., managing auctions, bids, and payments).
+
+2.To communicate with you about your account, auctions, and updates to our services.
+
+3.To enhance the user experience by analyzing app usage and trends.
+
+4.To process payments and refunds.
+
+5.To comply with legal obligations.
 """)
     st.title("3.Sharing Your Information")
     st.write("""
 We do not sell or rent your personal information to third parties. However, we may share your information with:
 
-**Service Providers**: We may share your information with third-party service providers who help us operate our app, process payments, and provide customer support.
-**Legal Requirements**: We may disclose your information if required by law or in response to legal requests.
+1.**Service Providers**: We may share your information with third-party service providers who help us operate our app, process payments, and provide customer support.
+
+2.**Legal Requirements**: We may disclose your information if required by law or in response to legal requests.
 """)
     st.title("4.Data Security")
     st.write("We implement security measures to protect your personal information, including encryption and secure server technologies. However, no method of transmission over the internet is completely secure, and we cannot guarantee absolute security.")
@@ -3365,9 +3370,9 @@ We do not sell or rent your personal information to third parties. However, we m
     st.write("""
 You have the right to:
 
--Access, update, or delete your personal information by contacting us at [techbidmarketplace@gmail.com].
+1.Access, update, or delete your personal information by contacting us at [techbidmarketplace@gmail.com].
 
--Opt out of marketing communications at any time by clicking "unsubscribe" in the emails we send.
+2.Opt out of marketing communications at any time by clicking "unsubscribe" in the emails we send.
 
 """)
     st.title("6.Cookies")
@@ -3399,7 +3404,7 @@ You have the right to:
                 """)  
     
     st.title("4.Payments")
-    st.write("All payments must be made through the payment options provided on our website(e.g., M-Pesa, Ko-fi). We do not store payment information on our servers.")
+    st.write("All payments must be made through the payment options provided on our website. We do not store payment information on our servers.")
     
     st.title("5.User Conduct")
     st.markdown(
@@ -3409,12 +3414,12 @@ You have the right to:
         3. **Data Privacy**: We respect your privacy and handle your data responsibly.
         """)
     st.title("6.Intellectual Property")
-    st.write("All content, logos, and other intellectual property associated with the app are the property of **TechBid Marketplace**. You are not permitted to reproduce or use any materials from the app without our written consent.")
+    st.write("All content, logos, and other intellectual property associated with the app are the property of **TechBid**. You are not permitted to reproduce or use any materials from the app without our written consent.")
     
     st.title("7.Limitation of Liability")
     st.write("To the fb9ullest extent permitted by law,**TechBid Marketplace** shall not be liable for any damages, losses, or expenses arising out of or in connection with your use of the app, including any technical issues, loss of bids, or unauthorized access to your account.")
     st.title("Contact Us")
-    st.markdown("For inquiries, feel free to [email us](techbidmarketplace.com).")
+    st.markdown("Feel free to emil us: [techbidmarketplace@gmail.com]".)
 
 # Categories filters by product code
 def category_filter_phones_tablets(code):
