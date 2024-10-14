@@ -3401,15 +3401,13 @@ You have the right to:
     st.write("All payments must be made through the payment options provided on our website(e.g., M-Pesa, Ko-fi). We do not store payment information on our servers.")
     
     st.title("5.User Conduct")
-    st.write("""
-You agree not to engage in any behavior that disrupts or interferes with the app's functionality or other users' experiences, including but not limited to:
-1.Hacking, tampering with, or otherwise attempting to bypass security features.
-
-2.Posting or transmitting any illegal, harmful, or offensive content.
-
-3.Using automated scripts or software to interact with the app
-            
-""")
+    st.markdown(
+        """
+        1. **Hacking**: Tampering with, or otherwise attempting to bypass security features is prohibited.
+        2. **Fair Usage**: All users must comply with fair usage policies.
+        3. **Data Privacy**: We respect your privacy and handle your data responsibly.
+        """
+    )
     st.title("6.Intellectual Property")
     st.write("All content, logos, and other intellectual property associated with the app are the property of **TechBid Marketplace**. You are not permitted to reproduce or use any materials from the app without our written consent.")
     
