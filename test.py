@@ -77,10 +77,6 @@ if 'current_page' not in st.session_state:
 
 
 
-# Load assets
-image1 = r"C:\Users\A\Downloads\Untitled design.png"
-
-
 
 # Initialize PesaPal class for authentication and order submission
 
