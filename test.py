@@ -3247,8 +3247,7 @@ def how_works():
              
     4 Visit our **Privacy Policy** page for more details
              
-    **Final Note**: The winner is determined based on the highest price placed on a product or the number of times a bid  was placed on one or different items(frequency) by an individeal.                                               
-    """)
+    
     st.write("---")
     st.title("Shipping and Logistics")
     st.write("""At **TechBid Marketplace**, we are committed to ensuring your winning bids are delivered quickly and securely, no matter where you are located. Our shipping and logistics policy is designed to offer convenience, transparency, and timely updates for all our users.
@@ -3280,7 +3279,7 @@ While we currently focus on domestic shipping, we are working on expanding our s
 **Return Policy**
              
 If your item arrives damaged or is not as described, you can initiate a return request within 7 days of receiving the product. 
-For any inquiries regarding shipping and logistics, feel free to contact our support team at [techbidmarketplace@gmail.com] .
+For any inquiries regarding shipping and logistics, feel free to contact our support team at [techbidmarketplace@gmail.com] , or visit our customer support page.
 
              
 """)
@@ -3369,7 +3368,7 @@ We do not sell or rent your personal information to third parties. However, we m
     st.write("""
 You have the right to:
 
--Access, update, or delete your personal information by contacting us at [Your Contact Information].
+-Access, update, or delete your personal information by contacting us at [techbidmarketplace@gmail.com].
 
 -Opt out of marketing communications at any time by clicking "unsubscribe" in the emails we send.
 
@@ -3384,7 +3383,7 @@ You have the right to:
     st.write("##")
     st.subheader("Our Terms of Service")
     st.write("---")
-    st.write("Welcome to **TechBid Marketplace** By using the App, you agree to comply with and be bound by the following terms and conditions. Please read these terms carefully.")
+    st.write("By using the App, you agree to comply with and be bound by the following terms and conditions. Please read these terms carefully.")
     st.title("1.Acceptance of Terms") 
     st.write("""By accessing and using our app, you agree to be bound by these terms of service and our privacy policy. If you do not agree with any part of these terms, please do not use the app.""")        
     st.title("2.User Accounts") 
