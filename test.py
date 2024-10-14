@@ -3406,8 +3406,7 @@ You have the right to:
         1. **Hacking**: Tampering with, or otherwise attempting to bypass security features is prohibited.
         2. **Fair Usage**: All users must comply with fair usage policies.
         3. **Data Privacy**: We respect your privacy and handle your data responsibly.
-        """
-    )
+        """)
     st.title("6.Intellectual Property")
     st.write("All content, logos, and other intellectual property associated with the app are the property of **TechBid Marketplace**. You are not permitted to reproduce or use any materials from the app without our written consent.")
     
