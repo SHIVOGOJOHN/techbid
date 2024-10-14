@@ -3281,7 +3281,7 @@ For any inquiries regarding shipping and logistics, feel free to contact our sup
 """)
 
 def about_us():
-    st.Title("About Us")
+    st.title("About Us")
     st.write("---")
  
 
