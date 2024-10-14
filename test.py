@@ -3445,16 +3445,14 @@ def main():
             st.video(video_bytes)
 
             with st.expander("**How do I place a bid?**", expanded=True):
-                st.markdown(
-                    """
+                       st.markdown ( """
                         **From The Sidebar:**
 
                         1. Sign Up                  
-                        2. Review the 'Privacy Policy'
+                        2. Review the Privacy Policy
                         3. Start bidding
-                    """
-                    
-                )
+                        
+                    """ )
 
             progress_bar = st.progress(0)
             for i in range(100):
