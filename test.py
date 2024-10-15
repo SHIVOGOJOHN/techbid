@@ -3453,7 +3453,7 @@ def main():
                           **From The Sidebar:**
       
                           1. Sign Up                  
-                          2. Review the Privacy Policy
+                          2. Review our Privacy Policy
                           3. Start bidding
                       """) 
                        
@@ -3535,22 +3535,22 @@ def main():
         if items != "Exit This Section":
             st.session_state.active_section = "categories"
             if items == "Phones and Tablets":
-                st.write("### Phones and Tablets")
+                st.subheader("Phones and Tablets")
                 bids_and_gadgets_page(category_filter_phones_tablets)
 
             elif items == "TV and Audio":
-                st.write("###TV and Audio")
+                st.subheader("TV and Audio")
                 bids_and_gadgets_page(category_filter_tv_audio)
 
             elif items == "Appliances":
-                st.write("###Appliances")
+                st.subheader("Appliances")
                 bids_and_gadgets_page(category_filter_appliances)
 
             elif items == "Computing":
-                st.write("###Computing")
+                st.subheader("Computing")
                 bids_and_gadgets_page(category_filter_computing)
         else:
-            st.write("### Please select a category from the sidebar to view available products.")
+            st.write("Please select a category from the sidebar to view available products.")
 
     
     st.sidebar.write("---")  
