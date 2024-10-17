@@ -441,7 +441,7 @@ class PesaPal:
             "currency": "KES",
             "amount": amount,
             "description": "Payment For Product",
-            "callback_url": "https://callbak-1.onrender.com",  # Replace with your actual callback URL
+            "callback_url": "https://callbak-1.onrender.com/ipn",  # Replace with your actual callback URL
             "notification_id": ipn_id,
             "billing_address": {
                 "phone_number": phone_number,
