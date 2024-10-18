@@ -2056,7 +2056,7 @@ def bids_and_gadgets_page(category_filter=None):
 
                                         if result:
                                             redirect_url = result.get("redirect_url")
-                                            st.markdown(f"[👉Click here to complete bid .]({redirect_url})", unsafe_allow_html=True)
+                                            st.markdown(f"[👉Click here to complete bid .]({https://pay.pesapal.com/iframe/PesapalIframe3/Index?OrderTrackingId=a202cc85-e9d1-4b46-bf03-dc9f25a7565a})", unsafe_allow_html=True)
                                         else:
                                             st.error("Bid failed. Please try again!.")
                                     else:
