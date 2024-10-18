@@ -2059,8 +2059,8 @@ def bids_and_gadgets_page(category_filter=None):
                                             redirect_url = f"https://pay.pesapal.com/iframe/PesapalIframe3/Index?OrderTrackingId={order_tracking_id}"
                                             st.markdown(f"[👉Click here to complete bid.]({redirect_url})", unsafe_allow_html=True)
 
-                                         else:
-                                             st.error("OrderTrackingId not found in the response.")
+                                       
+                                            
                                         else:
                                             st.error("Bid failed. Please try again!.")
                                     else:
