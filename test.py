@@ -2037,7 +2037,7 @@ def bids_and_gadgets_page(category_filter=None):
                                 step=1,
                                 key=f"bid-{product_code}"
                             )             
-                            submit_button = st.form_submit_button("Confirm Bid",key=f"confirm-{gadget['name']}-{idx}")
+                            submit_button = st.form_submit_button("Confirm Bid")
                         if submit_button:
 
                             # Payment initiation with spinner for loading effect
