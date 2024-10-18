@@ -2025,20 +2025,20 @@ def bids_and_gadgets_page(category_filter=None):
 
                     # Display the form if it is currently visible
                     if st.session_state.show_form.get(product_code, True):
+                        with st.form(key=f"bid-form-{product_code}"): 
+                            Fname = st.text_input("First Name", key=f"fname-{product_code}")
+                            Lname = st.text_input("Last Name", key=f"lname-{product_code}")
+                            email = st.text_input("Email Address",key=f"email-{product_code}")
+                            phone = st.text_input("Phone Number (+254...)", key=f"phone-{product_code}")
+                            bid_amount = st.number_input(
+                                f"Enter your bid amount for {gadget['name']}",
+                                min_value=gadget['price'],
+                                value=gadget['price'],
+                                step=1,
+                                key=f"bid-{product_code}"
+                            )             
 
-                        Fname = st.text_input("First Name", key=f"fname-{product_code}")
-                        Lname = st.text_input("Last Name", key=f"lname-{product_code}")
-                        email = st.text_input("Email Address",key=f"email-{product_code}")
-                        phone = st.text_input("Phone Number (+254...)", key=f"phone-{product_code}")
-                        bid_amount = st.number_input(
-                            f"Enter your bid amount for {gadget['name']}",
-                            min_value=gadget['price'],
-                            value=gadget['price'],
-                            step=1,
-                            key=f"bid-{product_code}"
-                        )             
-
-                        if st.button("Confirm Bid", key=f"confirm-{gadget['name']}-{idx}"):
+                        if st.form_submit_button("Confirm Bid", key=f"confirm-{gadget['name']}-{idx}"):
 
                             # Payment initiation with spinner for loading effect
                             if Fname and Lname and phone and email and product_code and bid_amount and product_name :
@@ -3137,14 +3137,15 @@ def search_bar():
                     st.session_state.show_form[index] = not st.session_state.show_form.get(index, True)
 
                 if st.session_state.show_form.get(index, True):
-                    # Input fields for user details
-                    Fname = st.text_input("First Name", key=f"fname-{result['name']}-{index}")
-                    Lname = st.text_input("Last Name", key=f"lname-{result['name']}-{index}")
-                    email = st.text_input("Email Address",key=f"email-{product_code}")
-                    phone = st.text_input("Phone Number (+254...)", key=f"phone-{result['name']}-{index}")
-                    bid_amount = st.number_input(f"Enter your bid amount for {result['name']}", min_value=result['price'], value=result['price'], step=1, key=f"bid-{result['name']}-{index}")
-                    
-                    if st.button("Confirm Bid", key=f"confirm-{result['name']}-{index}"):
+                    with st.form(key=f"bid-form-{product_code}"): 
+                        # Input fields for user details
+                        Fname = st.text_input("First Name", key=f"fname-{result['name']}-{index}")
+                        Lname = st.text_input("Last Name", key=f"lname-{result['name']}-{index}")
+                        email = st.text_input("Email Address",key=f"email-{product_code}")
+                        phone = st.text_input("Phone Number (+254...)", key=f"phone-{result['name']}-{index}")
+                        bid_amount = st.number_input(f"Enter your bid amount for {result['name']}",min_value=result['price'], value=result['price'], step=1, key=f"bid-{result['name']}-{index}")
+                        submit_button = st.form_submit_button("Confirm Bid") 
+                     if st.button("Confirm Bid", key=f"confirm-{result['name']}-{index}"):
                         if Fname and Lname and phone and email and product_code and bid_amount and product_name :
                             if bid_amount >= result["price"]:
                                 save_bid(Lname, Lname, email, phone, bid_amount, product_code,product_name)
