@@ -3144,8 +3144,8 @@ def search_bar():
                         email = st.text_input("Email Address",key=f"email-{product_code}")
                         phone = st.text_input("Phone Number (+254...)", key=f"phone-{result['name']}-{index}")
                         bid_amount = st.number_input(f"Enter your bid amount for {result['name']}",min_value=result['price'], value=result['price'], step=1, key=f"bid-{result['name']}-{index}")
-                        submit_button = st.form_submit_button("Confirm Bid") 
-                     if st.button("Confirm Bid", key=f"confirm-{result['name']}-{index}"):
+                        
+                    if st.button("Confirm Bid", key=f"confirm-{result['name']}-{index}"):
                         if Fname and Lname and phone and email and product_code and bid_amount and product_name :
                             if bid_amount >= result["price"]:
                                 save_bid(Lname, Lname, email, phone, bid_amount, product_code,product_name)
