@@ -2053,11 +2053,9 @@ def bids_and_gadgets_page(category_filter=None):
                                         with st.spinner("Checkout Loading..."):
                                             order_id = str(uuid.uuid4())
                                             result = pesapal.initiate_payment(token, phone, bid_amount, order_id, Fname, Lname)
-                                            if result:
-                                                redirect_url = result.get("redirect_url")                        
-                                                st.markdown(f"[👉Click here to complete bid .](https://pay.pesapal.com/iframe/PesapalIframe3/Index?OrderTrackingId={order_id})", unsafe_allow_html=True)                                            
-                                                                            
-                                            
+                                        if result:
+                                            redirect_url = result.get("redirect_url")                        
+                                            st.markdown(f"[👉Click here to complete bid .](https://pay.pesapal.com/iframe/PesapalIframe3/Index?OrderTrackingId={order_id})", unsafe_allow_html=True)                                                                                                                       
                                         else:
                                             st.error("Bid failed. Please try again!.")
                                     else:
