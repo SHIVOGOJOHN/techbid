@@ -7,3 +7,4 @@ altair
 joblib
 scikit-learn
 pymongo
+uuid
