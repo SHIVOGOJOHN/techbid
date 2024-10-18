@@ -428,20 +428,25 @@ class PesaPal:
         response = requests.post(self.auth_url, headers=headers, data=payload)
 
         if response.status_code == 200:
-            return response.json().get('token')
+            token = response.json().get('token')
+            if token:                     
+                return token
+            else:
+                raise ValueError("Token not found in authentication response.")
         else:
-            return None
+            raise ValueError(f"Authentication failed with status code {response.status_code}.")
 
     def initiate_payment(self, token, phone_number, amount, order_id, Fname, Lname):
         endpoint = "Transactions/SubmitOrderRequest"
         ipn_id = self.register_ipn()
-
+        if not ipn_id:
+            raise ValueError("Failed to register IPN.")
         payload = {
             "id": order_id,
             "currency": "KES",
             "amount": amount,
             "description": "Payment For Product",
-            "callback_url": "https://callbak-1.onrender.com/pesapal/callback",  # Replace with your actual callback URL
+            "callback_url": "https://callbak-1.onrender.com",  # Replace with your actual callback URL
             "notification_id": ipn_id,
             "billing_address": {
                 "phone_number": phone_number,
@@ -461,11 +466,16 @@ class PesaPal:
         }
 
         response = requests.post(self.ipn_base_url + endpoint, headers=headers, json=payload)
-        return response.json()
-
+        if response.status_code == 200:
+            return response.json()
+        else:
+            raise ValueError(f"Payment initiation failed with status code {response.status_code}: {response.text}")
+         
     def register_ipn(self):
         if self.cached_ipn_id:
             return self.cached_ipn_id
+         
+        
         ipn_endpoint = "URLSetup/RegisterIPN"
         payload = {
             "url": "https://ipn-06ai.onrender.com/pesapal/ipn",
@@ -473,6 +483,8 @@ class PesaPal:
         }
 
         token = self.authentication()
+        if not token:
+            raise ValueError("Failed to retrieve token for IPN registration.") 
         headers = {
             'Content-Type': 'application/json',
             'Authorization': f"Bearer {token}"
@@ -483,7 +495,8 @@ class PesaPal:
             ipn_response = response.json()
             self.cached_ipn_id = ipn_response.get("ipn_id")
             return self.cached_ipn_id
-        return None
+        else:
+            raise ValueError(f"IPN registration failed with status code {response.status_code}.")
 
 
 
