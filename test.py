@@ -446,7 +446,7 @@ class PesaPal:
             "currency": "KES",
             "amount": amount,
             "description": "Payment For Product",
-            "callback_url": "https://callbak-1.onrender.com",  # Replace with your actual callback URL
+            "callback_url": "https://callbak-1.onrender.com/pesapal/callback",  # Replace with your actual callback URL
             "notification_id": ipn_id,
             "billing_address": {
                 "phone_number": phone_number,
@@ -478,7 +478,7 @@ class PesaPal:
         
         ipn_endpoint = "URLSetup/RegisterIPN"
         payload = {
-            "url": "https://ipn-06ai.onrender.com",
+            "url": "https://ipn-06ai.onrender.com/pesapal/ipn",
             "ipn_notification_type": "GET"
         }
 
