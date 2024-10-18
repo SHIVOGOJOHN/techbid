@@ -478,7 +478,7 @@ class PesaPal:
         
         ipn_endpoint = "URLSetup/RegisterIPN"
         payload = {
-            "url": "https://ipn-06ai.onrender.com/pesapal/ipn",
+            "url": "https://ipn-06ai.onrender.com",
             "ipn_notification_type": "GET"
         }
 
