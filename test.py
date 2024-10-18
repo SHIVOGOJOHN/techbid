@@ -2057,7 +2057,7 @@ def bids_and_gadgets_page(category_filter=None):
                                         if result and "OrderTrackingId" in result:
                                              order_tracking_id = result["OrderTrackingId"]
                                              redirect_url = f"https://pay.pesapal.com/iframe/PesapalIframe3/Index?OrderTrackingId={order_tracking_id}"
-                                             st.markdown(f"[👉Click here to complete bid .](https://pay.pesapal.com/iframe/PesapalIframe3/Index?OrderTrackingId={order_tracking_id}), unsafe_allow_html=True)                                            
+                                             st.markdown(f"[👉Click here to complete bid .](https://pay.pesapal.com/iframe/PesapalIframe3/Index?OrderTrackingId={order_tracking_id})", unsafe_allow_html=True)                                            
                                                                         
                                             
                                         else:
