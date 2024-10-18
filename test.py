@@ -2055,7 +2055,7 @@ def bids_and_gadgets_page(category_filter=None):
                                             result = pesapal.initiate_payment(token, phone, bid_amount, order_id, Fname, Lname)
 
                                         if result and "OrderTrackingId" in result:
-                                            order_tracking_id = result["OrderTrackingId"]
+                                            order_tracking_id = 19bd5816-9863-472a-9254-dc9f095efdcb
                                             redirect_url = f"https://pay.pesapal.com/iframe/PesapalIframe3/Index?OrderTrackingId={order_tracking_id}"
                                             st.markdown(f"[👉Click here to complete bid.]({redirect_url})", unsafe_allow_html=True)
 
