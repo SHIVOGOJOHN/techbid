@@ -1957,7 +1957,12 @@ def bids_and_gadgets_page(category_filter=None):
             update_highest_bid(product_code, new_highest_bid)      
     
     simulate_random_bids()
-
+    # Function to generate a unique order ID
+    def generate_order_id(user_id):
+        date_str = time.strftime("%Y%m%d")  # Current date in YYYYMMDD format
+        random_number = random.randint(1000, 9999)  # Random number to ensure uniqueness
+        return f"{date_str}_{user_id}_{random_number}"
+     
     # Display products in columns and rows
     for idx, gadget in enumerate(filtered_gadgets):
         col_idx = idx % 4  # Get column index
@@ -2052,13 +2057,13 @@ def bids_and_gadgets_page(category_filter=None):
                                      
                                     if token:
                                         with st.spinner("Checkout Loading..."):
-                                            order_id = str(uuid.uuid4())
-                                            st.write("Bid Amount:", bid_amount)
+                                            order_id = generate_order_id(phone)
                                             result = pesapal.initiate_payment(token, phone, bid_amount, order_id, Fname, Lname)
                                          
                                         if result:
-                                            redirect_url = f"https://pay.pesapal.com/iframe/PesapalIframe3/Index?OrderTrackingId={order_id}"
-                                            st.markdown(f"[👉Click here to complete bid .]({redirect_url})", unsafe_allow_html=True)                                                                                                                       
+                                            redirect_url = result.get("redirect_url")
+                                            st.markdown(f"[👉Click here to complete bid.]({redirect_url})", unsafe_allow_html=True)
+                                                                                                                                                                   
                                         else:
                                             st.error("Bid failed. Please try again!.")
                                     else:
