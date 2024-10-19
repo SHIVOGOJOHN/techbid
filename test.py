@@ -2039,10 +2039,11 @@ def bids_and_gadgets_page(category_filter=None):
                             )             
                             submit_button = st.form_submit_button("Confirm Bid")
                         if submit_button:
-
+                            if bid_amount <= 0:
+                                st.error("Bid amount must be greater than 0.")
                             # Payment initiation with spinner for loading effect
                             if Fname and Lname and phone and email and product_code and bid_amount and product_name :
-                                if bid_amount >= 50:
+                                if bid_amount >= gadget['price']:
                                     save_bid(Lname, Lname, email, phone, bid_amount, product_code,product_name)
                                     send_confirmation(email, Fname, Lname, bid_amount, product_name)
 
@@ -2052,6 +2053,7 @@ def bids_and_gadgets_page(category_filter=None):
                                     if token:
                                         with st.spinner("Checkout Loading..."):
                                             order_id = str(uuid.uuid4())
+                                            st.write("Bid Amount:", bid_amount)
                                             result = pesapal.initiate_payment(token, phone, bid_amount, order_id, Fname, Lname)
                                          
                                         if result:
