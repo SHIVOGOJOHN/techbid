@@ -2042,13 +2042,13 @@ def bids_and_gadgets_page(category_filter=None):
 
                             # Payment initiation with spinner for loading effect
                             if Fname and Lname and phone and email and product_code and bid_amount and product_name :
-                                if bid_amount >= gadget["price"]:
+                                if bid_amount >= gadgets["price"]:
                                     save_bid(Lname, Lname, email, phone, bid_amount, product_code,product_name)
                                     send_confirmation(email, Fname, Lname, bid_amount, product_name)
 
                                     pesapal = PesaPal()
                                     token = pesapal.authentication()
-
+                                     
                                     if token:
                                         with st.spinner("Checkout Loading..."):
                                             order_id = str(uuid.uuid4())
