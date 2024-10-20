@@ -428,13 +428,10 @@ class PesaPal:
         response = requests.post(self.auth_url, headers=headers, data=payload)
 
         if response.status_code == 200:
-            token = response.json().get('token')
-            if token:                     
-                return token
-            else:
-                raise ValueError("Token not found in authentication response.")
+            return response.json().get('token')
+            
         else:
-            raise ValueError(f"Authentication failed with status code {response.status_code}.")
+            return none
 
     def initiate_payment(self, token, phone, bid_amount, order_id, Fname, Lname):
      
@@ -444,15 +441,15 @@ class PesaPal:
         payload = {
             "id": order_id,
             "currency": "KES",
-            "amount": amount,
-            "description": "Payment For Product",
+            "amount": bid_amount,
+            "description": "Bid For Product",
             "callback_url": "https://callbak-1.onrender.com/pesapal/callback",  # Replace with your actual callback URL
             "redirect_mode": "",
             "notification_id": ipn_id,
             "branch": "Store Name - HQ",
             "billing_address": {
                 "email_address": "john.doe@example.com",
-                "phone_number": phone_number,
+                "phone_number": phone,
                 "country_code": "KE",
                 "first_name": Fname,
                 "middle_name": "",
@@ -474,10 +471,8 @@ class PesaPal:
         }
 
         response = requests.post(self.ipn_base_url + endpoint, headers=headers, json=payload)
-        if response.status_code == 200:
-            return response.json()
-        else:
-            raise ValueError(f"Payment initiation failed with status code {response.status_code}: {response.text}")
+        return response.json()
+       
          
     def register_ipn(self):
         if self.cached_ipn_id:
@@ -491,8 +486,6 @@ class PesaPal:
         }
 
         token = self.authentication()
-        if not token:
-            raise ValueError("Failed to retrieve token for IPN registration.") 
         headers = {
             'Content-Type': 'application/json',
             'Authorization': f"Bearer {token}"
@@ -503,8 +496,7 @@ class PesaPal:
             ipn_response = response.json()
             self.cached_ipn_id = ipn_response.get("ipn_id")
             return self.cached_ipn_id
-        else:
-            raise ValueError(f"IPN registration failed with status code {response.status_code}.")
+        
 
 
 
@@ -2052,8 +2044,6 @@ def bids_and_gadgets_page(category_filter=None):
                             )             
                             submit_button = st.form_submit_button("Confirm Bid")
                         if submit_button:
-                            if bid_amount <= 0:
-                                st.error("Bid amount must be greater than 0.")
                             # Payment initiation with spinner for loading effect
                             if Fname and Lname and phone and email and product_code and bid_amount and product_name and order_id and token :
                                 if bid_amount >= gadget['price']:
