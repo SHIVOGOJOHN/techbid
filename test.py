@@ -2052,12 +2052,12 @@ def bids_and_gadgets_page(category_filter=None):
                             if bid_amount <= 0:
                                 st.error("Bid amount must be greater than 0.")
                             # Payment initiation with spinner for loading effect
-                            if Fname and Lname and phone and email and product_code and bid_amount and product_name :
+                            if Fname and Lname and phone and email and product_code and bid_amount and product_name and order_id and token :
                                 if bid_amount >= gadget['price']:
                                     save_bid(Lname, Lname, email, phone, bid_amount, product_code,product_name)
                                     send_confirmation(email, Fname, Lname, bid_amount, product_name)
                                  
-                                def initiate_payment_process(gadget, Fname, Lname, phone, bid_amount):
+                                
                                     pesapal = PesaPal()
                                     token = pesapal.authentication()
                                      
