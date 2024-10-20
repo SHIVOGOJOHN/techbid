@@ -417,7 +417,7 @@ class PesaPal:
         ipn_id = self.register_ipn()
      
         payload = {
-            "id": "89f92bc5-fa47-4e63-90d5-dc9d970ad210",
+            "id": order_id,
             "currency": "KES",
             "amount": bid_amount,
             "description": "Bid For Product",
@@ -460,7 +460,7 @@ class PesaPal:
         ipn_endpoint = "URLSetup/RegisterIPN"
         payload = {
             "url": "https://ipn-06ai.onrender.com/pesapal/ipn",
-            "ipn_notification_type": "GET"
+            "ipn_notification_type": "POST"
         }
 
         token = self.authentication()
@@ -2010,10 +2010,9 @@ def bids_and_gadgets_page(category_filter=None):
                             phone = st.text_input("Phone Number (+254...)", key=f"phone-{product_code}")
                             bid_amount = st.number_input(
                                 f"Enter your bid amount for {gadget['name']}",
-                                min_value=float(gadget['price']),
-                                value=float(gadget['price']),
-                                step=0.01,
-                                format="%.2f",
+                                min_value=gadget['price'],
+                                value=gadget['price'],
+                                step=1,
                                 key=f"bid-{product_code}"
                             )             
                             submit_button = st.form_submit_button("Confirm Bid")
@@ -2021,7 +2020,7 @@ def bids_and_gadgets_page(category_filter=None):
                             # Payment initiation with spinner for loading effect
                             if Fname and Lname and phone and email and product_code and bid_amount and product_name :
                                 if bid_amount >= gadget['price']:
-                                    save_bid(Lname, Lname, email, phone, bid_amount, product_code,product_name)
+                                    save_bid(Fname, Lname, email, phone, bid_amount, product_code,product_name)
                                     send_confirmation(email, Fname, Lname, bid_amount, product_name)
                                  
                                    
@@ -2034,15 +2033,15 @@ def bids_and_gadgets_page(category_filter=None):
                                             result = pesapal.initiate_payment(token, phone, bid_amount,order_id, Fname, Lname)
 
                                         if result:
-                                            redirect_url = result.get(f"https://pay.pesapal.com/iframe/PesapalIframe3/Index?OrderTrackingId={order_id}")
+                                            redirect_url = result.get("redirect_url")
                                             st.markdown(
                                                 f'<a href="{redirect_url}" target="_blank" rel="noopener noreferrer">'
                                                 f'<button style="background-color: #4CAF50; color: white; padding: 10px; border: none; cursor: pointer; border-radius: 8px;">'
                                                 f'Click here to complete your bid</button></a>',
                                                 unsafe_allow_html=True
                                             )
-                                                                                                                                                                                                                       
-                                      
+                                        else:
+                                            st.error("Bid failed. Please try again!.") 
                                     else:
                                         st.error("Cannot process payment. Try again!")
                                 else:
