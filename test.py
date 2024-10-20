@@ -2027,7 +2027,7 @@ def bids_and_gadgets_page(category_filter=None):
                     if st.button("Minimize/Expand Form", key=f"minimize-{gadget['name']}-{product_code}"):
                         # Toggle the visibility state for the form
                         st.session_state.show_form[product_code] = not st.session_state.show_form.get(product_code, True)
-
+                     
                     # Display the form if it is currently visible
                     if st.session_state.show_form.get(product_code, True):
                         with st.form(key=f"bid-form-{product_code}"): 
@@ -2037,9 +2037,10 @@ def bids_and_gadgets_page(category_filter=None):
                             phone = st.text_input("Phone Number (+254...)", key=f"phone-{product_code}")
                             bid_amount = st.number_input(
                                 f"Enter your bid amount for {gadget['name']}",
-                                min_value=gadget['price'],
-                                value=gadget['price'],
-                                step=1,
+                                min_value=float(gadget['price']),
+                                value=float(gadget['price']),
+                                step=0.01,
+                                format="%.2f",
                                 key=f"bid-{product_code}"
                             )             
                             submit_button = st.form_submit_button("Confirm Bid")
@@ -2050,7 +2051,7 @@ def bids_and_gadgets_page(category_filter=None):
                                     save_bid(Lname, Lname, email, phone, bid_amount, product_code,product_name)
                                     send_confirmation(email, Fname, Lname, bid_amount, product_name)
                                  
-                                
+                                   
                                     pesapal = PesaPal()
                                     token = pesapal.authentication()
                                      
