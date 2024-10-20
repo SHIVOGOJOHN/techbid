@@ -1925,15 +1925,16 @@ def bids_and_gadgets_page(category_filter=None):
         if new_bid > st.session_state.highest_bids[product_code]:
             st.session_state.highest_bids[product_code] = new_bid 
 
-    # Simulate random bid increase between 1 and 10
-    def simulate_random_bids():
-        for product_code in st.session_state.highest_bids.keys():
+    @st.cache_data
+    def simulate_random_bids(highest_bids):
+        updated_bids = highest_bids.copy()
+        for product_code in highest_bids.keys():
             random_increment = random.randint(1, 55)
-            new_highest_bid = st.session_state.highest_bids[product_code] + random_increment
-            update_highest_bid(product_code, new_highest_bid)      
+            updated_bids[product_code] += random_increment
+        return updated_bids
     
-    simulate_random_bids()
-    
+# Simulate random bids (call once when initializing the app)
+    st.session_state.highest_bids = simulate_random_bids(st.session_state.highest_bids)
      
     # Display products in columns and rows
     for idx, gadget in enumerate(filtered_gadgets):
@@ -2033,9 +2034,9 @@ def bids_and_gadgets_page(category_filter=None):
                                             result = pesapal.initiate_payment(token, phone, bid_amount,order_id, Fname, Lname)
 
                                         if result:
-                                            redirect_url = f"https://pay.pesapal.com/iframe/PesapalIframe3/Index?OrderTrackingId={order_id}"
+                                            redirect_url = result.get(f"https://pay.pesapal.com/iframe/PesapalIframe3/Index?OrderTrackingId={order_id}")
                                             st.markdown(
-                                                f'<a href="https://pay.pesapal.com/iframe/PesapalIframe3/Index?OrderTrackingId=89f92bc5-fa47-4e63-90d5-dc9d970ad212" target="_blank" rel="noopener noreferrer">'
+                                                f'<a href="{redirect_url}" target="_blank" rel="noopener noreferrer">'
                                                 f'<button style="background-color: #4CAF50; color: white; padding: 10px; border: none; cursor: pointer; border-radius: 8px;">'
                                                 f'Click here to complete your bid</button></a>',
                                                 unsafe_allow_html=True
