@@ -3575,7 +3575,7 @@ def main():
 
         with image_column:
             # Replace the image with a video
-            video_file = open(r"C:\Users\A\AppData\Local\CapCut\Videos\youtube ex\1012 (1).mp4", "rb")
+            video_file = open("1012 (1).mp4", "rb")
             video_bytes = video_file.read()
             st.video(video_bytes)
 
