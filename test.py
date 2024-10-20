@@ -2063,7 +2063,7 @@ def bids_and_gadgets_page(category_filter=None):
                                        
                                             redirect_url = f"https://pay.pesapal.com/iframe/PesapalIframe3/Index?OrderTrackingId={order_id}"
                                             st.markdown(
-                                                f'<a href="{redirect_url}" target="_blank" rel="noopener noreferrer">'
+                                                f'<a href="https://pay.pesapal.com/iframe/PesapalIframe3/Index?OrderTrackingId={order_id}" target="_blank" rel="noopener noreferrer">'
                                                 f'<button style="background-color: #4CAF50; color: white; padding: 10px; border: none; cursor: pointer;">'
                                                 f'Click here to complete your payment</button></a>',
                                                 unsafe_allow_html=True
