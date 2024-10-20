@@ -436,7 +436,12 @@ class PesaPal:
         else:
             raise ValueError(f"Authentication failed with status code {response.status_code}.")
 
-    def initiate_payment(self, token, phone_number, amount, order_id, Fname, Lname):
+    def initiate_payment(self, token, phone, bid_amount, order_id, Fname, Lname):
+     
+        return {
+            "redirect_url": f"https://pay.pesapal.com/iframe/PesapalIframe3/Index?OrderTrackingId={order_id}"
+        }
+     
         endpoint = "Transactions/SubmitOrderRequest"
         ipn_id = self.register_ipn()
         if not ipn_id:
@@ -2051,7 +2056,8 @@ def bids_and_gadgets_page(category_filter=None):
                                 if bid_amount >= gadget['price']:
                                     save_bid(Lname, Lname, email, phone, bid_amount, product_code,product_name)
                                     send_confirmation(email, Fname, Lname, bid_amount, product_name)
-
+                                 
+                                def initiate_payment_process(gadget, Fname, Lname, phone, bid_amount):
                                     pesapal = PesaPal()
                                     token = pesapal.authentication()
                                      
@@ -2059,12 +2065,12 @@ def bids_and_gadgets_page(category_filter=None):
                                         with st.spinner("Checkout Loading..."):
                                             order_id = generate_order_id(phone)
                                             result = pesapal.initiate_payment(token, phone, bid_amount, order_id, Fname, Lname)
-                                         
-                                       
-                                            redirect_url = f"https://pay.pesapal.com/iframe/PesapalIframe3/Index?OrderTrackingId={order_id}"
+
+                                       if result:
+                                            redirect_url = result.get("https://pay.pesapal.com/iframe/PesapalIframe3/Index?OrderTrackingId={order_id}")
                                             st.markdown(
-                                                f'<a href="https://pay.pesapal.com/iframe/PesapalIframe3/Index?OrderTrackingId={order_id}" target="_blank" rel="noopener noreferrer">'
-                                                f'<button style="background-color: #4CAF50; color: white; padding: 10px; border: none; cursor: pointer;">'
+                                                f'<a href="{redirect_url}" target="_blank" rel="noopener noreferrer">'
+                                                f'<button style="background-color: #4CAF50; color: white; padding: 10px; border: none; cursor: pointer; border-radius: 8px;">'
                                                 f'Click here to complete your payment</button></a>',
                                                 unsafe_allow_html=True
                                             )
