@@ -1,5 +1,4 @@
 import streamlit as st 
-from streamlit_lottie import st_lottie
 import mysql.connector
 from mysql.connector import Error
 import hashlib
@@ -18,8 +17,6 @@ from mysql.connector import Error
 from datetime import datetime, timedelta  # Import directly
 import joblib
 from sklearn.preprocessing import LabelEncoder
-from  pymongo import MongoClient
-import pymongo
 import gridfs
 import io
 import random
