@@ -458,7 +458,7 @@ class PesaPal:
                 "line_2": "",               
                 "city": "Nairobi",
                 "state": "",
-                "postal_code": "00100"
+                "postal_code": "00100",
                 "zip_code": ""
 
             }
