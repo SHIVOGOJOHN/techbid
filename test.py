@@ -441,7 +441,7 @@ class PesaPal:
         payload = {
             "id": order_id,
             "currency": "KES",
-            "amount": bid_amount,
+            "amount": 100.00,
             "description": "Bid For Product",
             "callback_url": "https://callbak-1.onrender.com/pesapal/callback",  # Replace with your actual callback URL
             "redirect_mode": "",
