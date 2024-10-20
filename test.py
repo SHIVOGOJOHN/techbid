@@ -2069,8 +2069,7 @@ def bids_and_gadgets_page(category_filter=None):
                                                 unsafe_allow_html=True
                                             )
                                                                                                                                                                                                                        
-                                        else:
-                                            st.error("Bid failed. Please try again!.")
+                                      
                                     else:
                                         st.error("Cannot process payment. Try again!")
                                 else:
