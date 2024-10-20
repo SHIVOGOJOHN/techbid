@@ -26,29 +26,9 @@ import pathlib
 
 
 # Set up page configuration only once
-st.set_page_config(page_title="Techbid Marketplace", layout="wide")
+st.set_page_config(page_title="Techbid Marketplace")
 
 
-# Load the preprocessor and model
-preprocessor_filename = "preprocessor.pkl"
-model_filename ="rf_pipeline.pkl" 
-
-
-preprocessor = joblib.load(preprocessor_filename)
-model = joblib.load(model_filename)
-
-
- #Prediction function
-def predict_win_probability(input_data):
-    # Convert input data to a DataFrame
-    input_df = pd.DataFrame([input_data])
-
-    # Apply the preprocessor to handle categorical features
-    input_df_transformed = preprocessor.transform(input_df)
-
-    # Make a prediction
-    prediction = model.predict(input_df_transformed)
-    return prediction
 
 # Function to generate custom product IDs based on the ranges provided
 def generate_product_id():
@@ -403,17 +383,15 @@ def bid_history():
 if "show_payment_form" not in st.session_state:
     st.session_state.show_payment_form = {}
    
-    
-
-   
 # Pesapal class from your code
 class PesaPal:
     def __init__(self):
         self.auth_url = "https://pay.pesapal.com/v3/api/Auth/RequestToken"
         self.ipn_base_url = "https://pay.pesapal.com/v3/api/"
         self.consumer_key = "tHHdZzfUleF7xUe7NIKmhFndky2LzE0v"
-        self.consumer_secret =  "OuVah65aa8nlL4r8JwpHdoSRgcU="
-        self.cached_ipn_id = None
+        self.consumer_secret = "OuVah65aa8nlL4r8JwpHdoSRgcU="
+        self.cached_ipn_id = None    
+
 
     def authentication(self):
         headers = {
@@ -441,7 +419,7 @@ class PesaPal:
         payload = {
             "id": order_id,
             "currency": "KES",
-            "amount": 100.00,
+            "amount": bid_amount,
             "description": "Bid For Product",
             "callback_url": "https://callbak-1.onrender.com/pesapal/callback",  # Replace with your actual callback URL
             "redirect_mode": "",
@@ -792,7 +770,7 @@ def bids_and_gadgets_page(category_filter=None):
             "name": "XIAOMI Redmi A3, 6.71",
             "image": "1 (3).jpg",
             "description": "4GB RAM +128GB (Dual SIM), 5000mAh, Midnight Black (Newest Model)",
-            "price": 9999,
+            "price": 9999.00,
             "product code": "p001",
             "ko_fi_link": "https://ko-fi.com/techbidmarket",  # Replace with your Ko-fi link
             "mpesa_link": "**Pochi La Biashara/Send Money**: +254704234829"
@@ -801,7 +779,7 @@ def bids_and_gadgets_page(category_filter=None):
             "name": "Sony PS4 ",
             "image": r"https://ke.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/23/188122/1.jpg?7875",
             "description": "500GB - Black",
-            "price": 19800,
+            "price": 19800.00,
             "product code": "a020",
             "category":  "Appliances",
         },
@@ -809,7 +787,7 @@ def bids_and_gadgets_page(category_filter=None):
             "name": "Itel S24",
             "image": "1 (5).jpg",
             "description": "6.6'', 128GB + 4GB (Extended UPTO 8GB) RAM, 5000mAh, Dawn White (1YR WRTY)",
-            "price": 7999,
+            "price": 7999.00,
             "product code": "p003",
             "ko_fi_link": "https://ko-fi.com/techbidmarket",
             "mpesa_link": "**Pochi La Biashara/Send Money:** 0704234829"
@@ -818,7 +796,7 @@ def bids_and_gadgets_page(category_filter=None):
             "name": "Samsung Smart TV ",
             "image": r"https://ke.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/96/386025/2.jpg?6154",
             "description": "43CU7000, 43” Crystal UHD 4K Smart TV",
-            "price": 11999,
+            "price": 11999.00,
             "product code": "s020",
             "category":  "Tv and Audio",
         },
@@ -826,7 +804,7 @@ def bids_and_gadgets_page(category_filter=None):
             "name":"Apple iPhone 15 Pro Max",
             "image":"1 (6).jpg",
             "description":"6.7‑inch (diagonal) all‑screen OLED display1, 256GB Storage256GB Storage, Action ButtonAction Button, USB-C Charge Cable capable4,Enabled by TrueDepth camera for facil recognition,",
-            "price": 33999,
+            "price": 33999.00,
             "product code": "p004",
             "ko_fi_link": "https://ko-fi.com/techbidmarket",
             "mpesa_link": "**Pochi La Biashara/Send Money:** 0704234829"
@@ -835,7 +813,7 @@ def bids_and_gadgets_page(category_filter=None):
             "name": "Samsung Galaxy S24 Ultra",
             "image": "1 (8).jpg",
             "description":"Cell Phone, 512GB AI Smartphone, Unlocked Android, 50MP Zoom Camera, Long Battery Life, S Pen",
-            "price": 17999,
+            "price": 17999.00,
             "product code": "p005",
             "ko_fi_link": "https://ko-fi.com/techbidmarket",
             "mpesa_link": "**Pochi La Biashara/Send Money:** 0704234829"
@@ -844,7 +822,7 @@ def bids_and_gadgets_page(category_filter=None):
             "name": "XIAOMI Redmi 13C",
             "image":"1 (9).jpg",
             "description":"6.47'',  256GB + 8GB RAM (Dual SIM) 5000mAh, 4G - Navy Blue",
-            "price":8999 ,
+            "price":8999.00 ,
             "product code": "p006",
             "ko_fi_link": "https://ko-fi.com/techbidmarket",
             "mpesa_link": "**Pochi La Biashara/Send Money:** 0704234829"
@@ -853,7 +831,7 @@ def bids_and_gadgets_page(category_filter=None):
             "name":" **Refurbished** Oppo A31",
             "image": "2 (1).jpg",
             "description":"6GB RAM+128GB ROM 6.5 Inch Screen HD Camera 12MP Cyan",
-            "price":5999 ,
+            "price":5999.00 ,
             "product code": "p007",
             "ko_fi_link": "https://ko-fi.com/techbidmarket",
             "mpesa_link": "**Pochi La Biashara/Send Money:** 0704234829"
@@ -862,7 +840,7 @@ def bids_and_gadgets_page(category_filter=None):
             "name": "Itel 2176 ",
             "image": "3 (1).jpg",
             "description":"Wireless FM, 1.8'', Dual SIM - 1000mAh - Blue",
-            "price": 8599,
+            "price": 8599.00,
             "product code": "p008",
             "ko_fi_link": "https://ko-fi.com/techbidmarket",
             "mpesa_link": "**Pochi La Biashara/Send Money:** 0704234829"
@@ -871,7 +849,7 @@ def bids_and_gadgets_page(category_filter=None):
             "name": "Moodio Tablet",
             "image": r"https://ke.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/31/7032842/1.jpg?1960",
             "description": " 6000mAH RAM 8GB/ ROM 512GB 10inch Android 11 Dual SIM CARD SLOT 5G TABLET PC Front 5PM Rear 13PM Android 12.0",
-            "price": 9999,
+            "price": 9999.00,
             "product code": "t001",
             "category":  "Phones and Tablets",
             "ko_fi_link": "https://ko-fi.com/techbidmarket",
@@ -882,7 +860,7 @@ def bids_and_gadgets_page(category_filter=None):
             "name": "Smartwatch T900 Pro Max",
             "image": r"https://ke.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/85/8855721/1.jpg?7826",
             "description": "Bluetooth call, Custom Wallpaper, drinking reminder blood oxygen, sports mode (outdoor running, walking, mountaineering, indoor running), Facebook, twitter, WhatsApp, calendar, message reminder ,heart rate, sleep monitoring, Bluetooth music, SMS, call record, SIRI/Voice Assistant, alarm clock, remote photo, step counting, blood pressure, address book, looking for mobile phone, etc.",
-            "price": 100,
+            "price": 100.00,
             "product code": "t002",
             "category":  "Phones and Tablets",
             "ko_fi_link": "https://ko-fi.com/techbidmarket",
@@ -892,7 +870,7 @@ def bids_and_gadgets_page(category_filter=None):
             "name": "Samsung Galaxy A15",
             "image":r"https://ke.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/70/5472971/1.jpg?3910",
             "description": "6.5'', 4GB RAM + 128GB ROM, DUAL SIM, 50MP, 5000mAh - Blue",
-            "price": 9599,
+            "price": 9599.00,
             "product code": "p009",
             "category":  "Phones and Tablets",
             "ko_fi_link": "https://ko-fi.com/techbidmarket",
@@ -902,7 +880,7 @@ def bids_and_gadgets_page(category_filter=None):
             "name": "Itel A50",
             "image": r"https://ke.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/16/1237632/1.jpg?6718",
             "description": "IPS LCD 6.6 INCHES WITH DYNAMIC BAR,UPTO 6GB RAM & 64GB ROM,5000MAH,TYPE-C,SPLY",
-            "price": 9899,
+            "price": 9899.00,
             "product code": "p010",
             "category":  "Phones and Tablets",
             "ko_fi_link": "https://ko-fi.com/techbidmarket",
@@ -912,7 +890,7 @@ def bids_and_gadgets_page(category_filter=None):
             "name": "Itel RS4",
             "image": r"https://ke.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/29/9119432/1.jpg?3778",
             "description": "6.6 inch DISPLAY 8GB RAM +256 GB ROM 5000 MAH DUAL SIM",
-            "price": 11799,
+            "price": 11799.00,
             "product code": "p011",
             "category":  "Phones and Tablets",
             "ko_fi_link": "https://ko-fi.com/techbidmarket",
@@ -1791,8 +1769,6 @@ def bids_and_gadgets_page(category_filter=None):
     else:
         filtered_gadgets = gadgets  # Show all gadgets if another category is selected
     
-
-    pesapal = PesaPal()
     # Initialize the selected gadget in session_state
     if 'selected_gadget' not in st.session_state:
         st.session_state.selected_gadget = None
@@ -1944,7 +1920,7 @@ def bids_and_gadgets_page(category_filter=None):
     def get_highest_bid(product_code):
         return st.session_state.highest_bids.get(product_code, 0)
 
-                # Update the highest bid after each successful bid
+    # Update the highest bid after each successful bid
     def update_highest_bid(product_code, new_bid):
         if new_bid > st.session_state.highest_bids[product_code]:
             st.session_state.highest_bids[product_code] = new_bid 
@@ -2061,7 +2037,7 @@ def bids_and_gadgets_page(category_filter=None):
                                             st.markdown(
                                                 f'<a href="{redirect_url}" target="_blank" rel="noopener noreferrer">'
                                                 f'<button style="background-color: #4CAF50; color: white; padding: 10px; border: none; cursor: pointer; border-radius: 8px;">'
-                                                f'Click here to complete your payment</button></a>',
+                                                f'Click here to complete your bid</button></a>',
                                                 unsafe_allow_html=True
                                             )
                                                                                                                                                                                                                        
