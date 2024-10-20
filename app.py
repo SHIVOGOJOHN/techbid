@@ -905,7 +905,7 @@ def bids_and_gadgets_page(category_filter=None):
         },
          {
             "name": "Itel S24",
-            "image": "(5).jpg",
+            "image": "1 (5).jpg",
             "description": "6.6'', 128GB + 4GB (Extended UPTO 8GB) RAM, 5000mAh, Dawn White (1YR WRTY)",
             "price": 185,
             "product code": "p003",
