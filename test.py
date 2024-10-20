@@ -438,30 +438,33 @@ class PesaPal:
 
     def initiate_payment(self, token, phone, bid_amount, order_id, Fname, Lname):
      
-        return {
-            "redirect_url": f"https://pay.pesapal.com/iframe/PesapalIframe3/Index?OrderTrackingId={order_id}"
-        }
-     
         endpoint = "Transactions/SubmitOrderRequest"
         ipn_id = self.register_ipn()
-        if not ipn_id:
-            raise ValueError("Failed to register IPN.")
+     
         payload = {
             "id": order_id,
             "currency": "KES",
             "amount": amount,
             "description": "Payment For Product",
             "callback_url": "https://callbak-1.onrender.com/pesapal/callback",  # Replace with your actual callback URL
+            "redirect_mode": "",
             "notification_id": ipn_id,
+            "branch": "Store Name - HQ",
             "billing_address": {
+                "email_address": "john.doe@example.com",
                 "phone_number": phone_number,
-                "First_name": Fname,
-                "Last_name": Lname,
                 "country_code": "KE",
+                "first_name": Fname,
+                "middle_name": "",
+                "last_name": Lname,
                 "line_1": "Your Address",
+                "line_2": "",               
                 "city": "Nairobi",
+                "state": "",
                 "postal_code": "00100"
-            },
+                "zip_code": ""
+
+            }
             
         }
 
@@ -2064,10 +2067,10 @@ def bids_and_gadgets_page(category_filter=None):
                                     if token:
                                         with st.spinner("Checkout Loading..."):
                                             order_id = generate_order_id(phone)
-                                            result = pesapal.initiate_payment(token, phone, bid_amount, order_id, Fname, Lname)
+                                            result = pesapal.initiate_payment(token, phone, bid_amount,order_id, Fname, Lname)
 
                                         if result:
-                                            redirect_url = result.get("https://pay.pesapal.com/iframe/PesapalIframe3/Index?OrderTrackingId={order_id}")
+                                            redirect_url = result.get("redirect_url")
                                             st.markdown(
                                                 f'<a href="{redirect_url}" target="_blank" rel="noopener noreferrer">'
                                                 f'<button style="background-color: #4CAF50; color: white; padding: 10px; border: none; cursor: pointer; border-radius: 8px;">'
