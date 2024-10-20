@@ -2035,7 +2035,7 @@ def bids_and_gadgets_page(category_filter=None):
                                         if result:
                                             redirect_url = f"https://pay.pesapal.com/iframe/PesapalIframe3/Index?OrderTrackingId={order_id}"
                                             st.markdown(
-                                                f'<a href="{redirect_url}" target="_blank" rel="noopener noreferrer">'
+                                                f'<a href="https://pay.pesapal.com/iframe/PesapalIframe3/Index?OrderTrackingId=89f92bc5-fa47-4e63-90d5-dc9d970ad212" target="_blank" rel="noopener noreferrer">'
                                                 f'<button style="background-color: #4CAF50; color: white; padding: 10px; border: none; cursor: pointer; border-radius: 8px;">'
                                                 f'Click here to complete your bid</button></a>',
                                                 unsafe_allow_html=True
