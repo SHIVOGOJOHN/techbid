@@ -28,13 +28,6 @@ import string
 st.set_page_config(page_title="Techbid Marketplace")
 
 
-# Load the preprocessor and model
-preprocessor_filename = r"C:\Users\A\Documents\preprocessor.pkl"
-model_filename =r"C:\Users\A\Documents\rf_pipeline.pkl" 
-
-
-preprocessor = joblib.load(preprocessor_filename)
-model = joblib.load(model_filename)
 
 
 
