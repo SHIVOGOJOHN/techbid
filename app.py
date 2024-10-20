@@ -2191,7 +2191,7 @@ def search_bar():
     gadgets = [
         {
             "name": "XIAOMI Redmi A3, 6.71",
-            "image": r"C:\Users\A\Downloads\1 (3).jpg",
+            "image": "1 (3).jpg",
             "description": "4GB RAM +128GB (Dual SIM), 5000mAh, Midnight Black (Newest Model)",
             "price": 80,
             "product code": "p001",
@@ -2200,7 +2200,7 @@ def search_bar():
         },
          {
             "name": "Itel S24",
-            "image": r"C:\Users\A\Downloads\1 (5).jpg",
+            "image": "1 (5).jpg",
             "description": "6.6'', 128GB + 4GB (Extended UPTO 8GB) RAM, 5000mAh, Dawn White (1YR WRTY)",
             "price": 185,
             "product code": "p003",
@@ -2217,7 +2217,7 @@ def search_bar():
         },
          {
             "name":"Apple iPhone 15 Pro Max",
-            "image":r"C:\Users\A\Downloads\1 (6).jpg",
+            "image":"1 (6).jpg",
             "description":"6.7‑inch (diagonal) all‑screen OLED display1, 256GB Storage256GB Storage, Action ButtonAction Button, USB-C Charge Cable capable4,Enabled by TrueDepth camera for facil recognition,",
             "price": 34000,
             "product code": "p004",
@@ -2226,7 +2226,7 @@ def search_bar():
         },
         {
             "name": "Samsung Galaxy S24 Ultra",
-            "image": r"C:\Users\A\Downloads\1 (8).jpg",
+            "image": "1 (8).jpg",
             "description":"Cell Phone, 512GB AI Smartphone, Unlocked Android, 50MP Zoom Camera, Long Battery Life, S Pen",
             "price": 2800,
             "product code": "p005",
@@ -2235,7 +2235,7 @@ def search_bar():
         },
         {
             "name": "XIAOMI Redmi 13C",
-            "image":r"C:\Users\A\Downloads\1 (9).jpg",
+            "image":"1 (9).jpg",
             "description":"6.47'',  256GB + 8GB RAM (Dual SIM) 5000mAh, 4G - Navy Blue",
             "price": 110,
             "product code": "p006",
@@ -2244,7 +2244,7 @@ def search_bar():
         },
         {
             "name":" **Refurbished** Oppo A31",
-            "image": r"C:\Users\A\Downloads\2 (1).jpg",
+            "image": "2 (1).jpg",
             "description":"6GB RAM+128GB ROM 6.5 Inch Screen HD Camera 12MP Cyan",
             "price":100 ,
             "product code": "p007",
@@ -2253,7 +2253,7 @@ def search_bar():
         },
         {
             "name": "Itel 2176 ",
-            "image": r"C:\Users\A\Downloads\3 (1).jpg",
+            "image": "3 (1).jpg",
             "description":"Wireless FM, 1.8'', Dual SIM - 1000mAh - Blue",
             "price": 50,
             "product code": "p008",
@@ -2363,7 +2363,7 @@ def search_bar():
         },
         {
             "name": "Itel Flip 1 Folding Phone",
-            "image": r"C:\Users\A\Downloads\1 (4).jpg",
+            "image": "1 (4).jpg",
             "description": " 2.4 inches QQVGA (240 x 320 pixels) display, 8MB of RAM 2.4 - 1200mAh (Dual SIM), Wireless FM, Blue (1YR WRTY)",
             "price": 75,
             "product code": "p002",
