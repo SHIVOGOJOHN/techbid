@@ -2045,7 +2045,7 @@ def bids_and_gadgets_page(category_filter=None):
                             submit_button = st.form_submit_button("Confirm Bid")
                         if submit_button:
                             # Payment initiation with spinner for loading effect
-                            if Fname and Lname and phone and email and product_code and bid_amount and product_name and order_id and token :
+                            if Fname and Lname and phone and email and product_code and bid_amount and product_name :
                                 if bid_amount >= gadget['price']:
                                     save_bid(Lname, Lname, email, phone, bid_amount, product_code,product_name)
                                     send_confirmation(email, Fname, Lname, bid_amount, product_name)
