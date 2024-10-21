@@ -873,16 +873,21 @@ expiry_times = {
 # Set how many hours or days to extend the countdown by once it reaches zero (for demo purposes)
 extension_period = timedelta(hours=72)  
 
-def get_time_left(expiry_times, product_code, extension_period):
+def get_time_left(expiry_time, product_code, extension_period):
     now = datetime.utcnow()
-    time_left = expiry_times - now
+    print(f"Current time (UTC): {now}")
+    print(f"Expiry time (UTC): {expiry_time}")
+    time_left = expiry_time - now
+    print(f"Time left: {time_left}")
+
     if time_left.total_seconds() > 0:
         return time_left
     else:
         # When the countdown reaches zero, reset to a new expiry
         new_expiry = now + extension_period
         expiry_times[product_code] = new_expiry  # Update expiry time for this product
-        return new_expiry - now
+        print(f"New expiry time: {new_expiry}")
+        return new_expiry - now  # Return new countdown
 
 
 ##########################                    
