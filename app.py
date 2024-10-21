@@ -873,25 +873,26 @@ expiry_times = {
 # Set how many hours or days to extend the countdown by once it reaches zero (for demo purposes)
 extension_period = timedelta(hours=72)  
 
-def get_time_left(expiry_time, product_code, extension_period):
-    now = datetime.utcnow()
-    print(f"Current time (UTC): {now}")
-    print(f"Expiry time (UTC): {expiry_time}")
-    time_left = expiry_time - now
-    print(f"Time left: {time_left}")
 
+def get_time_left(expiry_time, product_code):
+    now = datetime.now()
+    
+    # Check if the product code exists in the expiry_times dictionary
+    if product_code not in expiry_times:
+        # Set a default expiry time if product_code is not found
+        expiry_times[product_code] = now + extension_period
+    
+    # Fetch the expiry time
+    expiry_time = expiry_times[product_code]
+    time_left = expiry_time - now
+    
     if time_left.total_seconds() > 0:
         return time_left
     else:
         # When the countdown reaches zero, reset to a new expiry
         new_expiry = now + extension_period
         expiry_times[product_code] = new_expiry  # Update expiry time for this product
-        print(f"New expiry time: {new_expiry}")
         return new_expiry - now  # Return new countdown
-
-
-##########################                    
-    
    
     
 #########################################
@@ -2050,7 +2051,9 @@ def bids_and_gadgets_page(category_filter=None):
         }
        
     
-
+    product_name=gadget["name"]
+    product_code = gadget["product code"]
+    
     # Function to get the current highest bid for a product
     def get_highest_bid(product_code):
         return st.session_state.highest_bids.get(product_code, 0)
@@ -2091,12 +2094,9 @@ def bids_and_gadgets_page(category_filter=None):
 
 
 
-                
-                product_name=gadget["name"]
-                product_code = gadget["product code"]
-                if product_code in expiry_times:           
+                if product_code in expiry_times:   
 
-                    time_left = get_time_left(expiry_times[product_code], product_code)
+                    time_left = get_time_left(expiry_times.get(product_code, datetime.now()), product_code)
                     days = time_left.days
                     hours = time_left.seconds // 3600
                     minutes = (time_left.seconds % 3600) // 60
