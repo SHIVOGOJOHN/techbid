@@ -531,8 +531,7 @@ class PesaPal:
         self.auth_url = "https://pay.pesapal.com/v3/api/Auth/RequestToken"
         self.ipn_base_url = "https://pay.pesapal.com/v3/api/"
         self.consumer_key = "tHHdZzfUleF7xUe7NIKmhFndky2LzE0v"
-        self.consumer_secret = "OuVah65aa8nlL4r8JwpHdoSRgcU="
-        self.cached_ipn_id = None
+        self.consumer_secret = st.secrets["general"]["consumer_secret"]
 
     def authentication(self):
         headers = {
@@ -559,17 +558,24 @@ class PesaPal:
             "id": order_id,
             "currency": "KES",
             "amount": bid_amount,
-            "description": "Payment For Product",
-            "callback_url": "https://callbak-1.onrender.com/pesapal/callback",  # Replace with your actual callback URL
+            "description": "Bid For Product",
+            "callback_url": "https://callbak-1.onrender.com/pesapal/callback",# Replace with your actual callback URL
+            "redirect_mode": "",
             "notification_id": ipn_id,
+            "branch": "Store Name - HQ",
             "billing_address": {
+                "email_address": "john.doe@example.com",
                 "phone_number": phone,
-                "First_name": Fname,
-                "Last_name": Lname,
+                "first_name": Fname,
+                "middle_name": "",
+                "last_name": Lname,
                 "country_code": "KE",
                 "line_1": "Your Address",
+                "line_2": "",
                 "city": "Nairobi",
+                "state": "",
                 "postal_code": "00100"
+                "zip_code": ""
             }
             
         }
@@ -3643,10 +3649,9 @@ def main():
             ("Bid", bids_and_gadgets_page),
             ("Search", search_bar),
             ("How It Works", how_works),
-            ("View Cart", cart_page),
+            ("Sell To Us", customer_support_page),
             ("About Us", about_us),
             ("Log In", login_page),
-            ("Sell To Us", customer_support_page),
             ("Customer Support", customer_support_page),
             ("Privacy Policy", privacy_policy),
         ]
@@ -3691,41 +3696,7 @@ def main():
     st.sidebar.write("---")  
 ################################
    
-######################################
-    st.sidebar.title("Try Out Our New  Bid Predictor")
-
-    product_id = st.sidebar.text_input('Product ID (e.g. p001, t010, etc.)', value='p001') 
-    bid_amount = st.sidebar.number_input('Your Bid Amount(Ksh.)', min_value=0.0, value=100.0, step=1.0)
-    max_bid_so_far = st.sidebar.number_input('Highest Bid On Product(Ksh.)', min_value=0.0, value=100.0, step=1.0)
-    user_past_wins = st.sidebar.number_input('Past Wins', min_value=0, value=0, step=1)
-    user_past_bids = st.sidebar.number_input('Total Past Bids', min_value=0, value=1, step=1)
-    time_left = st.sidebar.number_input('Time Left (hours)', min_value=1, value=120, step=1)
-    product_starting_price = st.sidebar.number_input('Product Starting Price', min_value=1.0, value=100.0, step=1.0)
-    user_max_bid = st.sidebar.number_input('Max Bid User Placed(Ksh.)', min_value=0.0, value=200.0, step=1.0)
-    product_category = st.sidebar.selectbox('Product Category', options=["Phones and Tablets", "Tv and Audio", "Appliances", "Computing"])
-    user_account_age = st.sidebar.number_input('User Account Age (Days)', min_value=1, value=30, step=1)
-    user_activity = st.sidebar.selectbox('User Activity', options=['daily', 'weekly', 'monthly'])
-
-     # Make predictions when button is clicked
-    
-    input_data = {
-        'product_id': product_id,
-        'bid_amount': bid_amount,
-        'max_bid_so_far': max_bid_so_far,
-        'user_past_wins': user_past_wins,
-        'user_past_bids': user_past_bids,
-        'time_left': time_left,
-        'product_starting_price': product_starting_price,
-        'user_max_bid': user_max_bid,
-        'product_category': product_category,
-        'user_account_age': user_account_age,
-        'user_activity': user_activity
-    }
-    if st.sidebar.button('Predict Probability of Winning'):
-        prediction = predict_win_probability(input_data)  # Get prediction
-        st.sidebar.write(f"**Prediction**: {'**Win**' if prediction == 0 else '**Lose**'}")  # Display prediction
-        st.sidebar.write("*Disclaimer!!* The Predictor is still under development. The results are based on user data collected")  
-    
+#####################################
 # Run the app
 if __name__ == "__main__":
     main()
