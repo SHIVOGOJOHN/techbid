@@ -560,22 +560,17 @@ class PesaPal:
             "amount": bid_amount,
             "description": "Bid For Product",
             "callback_url": "https://callbak-1.onrender.com/pesapal/callback",# Replace with your actual callback URL
-            "redirect_mode": "",
             "notification_id": ipn_id,
             "branch": "Store Name - HQ",
             "billing_address": {
                 "email_address": "john.doe@example.com",
                 "phone_number": phone,
                 "first_name": Fname,
-                "middle_name": "",
                 "last_name": Lname,
                 "country_code": "KE",
                 "line_1": "Your Address",
-                "line_2": "",
                 "city": "Nairobi",
-                "state": "",
-                "postal_code": "00100",
-                "zip_code": ""
+                "postal_code": "00100"
             }
             
         }
