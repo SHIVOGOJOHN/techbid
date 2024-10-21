@@ -532,6 +532,8 @@ class PesaPal:
         self.ipn_base_url = "https://pay.pesapal.com/v3/api/"
         self.consumer_key = "tHHdZzfUleF7xUe7NIKmhFndky2LzE0v"
         self.consumer_secret = st.secrets["general"]["consumer_secret"]
+        self.cached_token = None #Cached the authentication token to avoid fetching it repeatedly for subsequent API requests
+        self.cached_ipn_id = None 
 
     def authentication(self):
         headers = {
