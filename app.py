@@ -2058,7 +2058,7 @@ def bids_and_gadgets_page(category_filter=None):
     # Simulate random bid increase between 1 and 10
     def simulate_random_bids():
         for product_code in st.session_state.highest_bids.keys():
-            random_increment = random.randint(1, )
+            random_increment = random.randint(1,5 )
             new_highest_bid = st.session_state.highest_bids[product_code] + random_increment
             update_highest_bid(product_code, new_highest_bid)      
     
