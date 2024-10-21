@@ -2091,7 +2091,7 @@ def bids_and_gadgets_page(category_filter=None):
 
 
 
-                #######
+                
                 product_name=gadget["name"]
                 product_code = gadget["product code"]
                 if product_code in expiry_times:           
@@ -3693,9 +3693,8 @@ def main():
 
     
     st.sidebar.write("---")  
-################################
-   
-#####################################
+
+
 # Run the app
 if __name__ == "__main__":
     main()
