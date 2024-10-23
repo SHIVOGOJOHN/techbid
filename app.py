@@ -1956,7 +1956,7 @@ def bids_and_gadgets_page(category_filter=None):
                 st.write("")  # Empty string to remove auto spacing   
                     
                 bid_button_key = f"bid-button-{gadget['product code']}-{idx}-{gadget['name']}"
-                   st.markdown(
+                st.markdown(
                     f"""
                     <div style="padding-top: 5px; margin: 0;">
                         <form action="">
