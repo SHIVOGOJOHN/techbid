@@ -3190,7 +3190,7 @@ While we currently focus on domestic shipping, we are working on expanding our s
 **Return Policy**
              
 If your item arrives damaged or is not as described, you can initiate a return request within 7 days of receiving the product. 
-For any inquiries regarding shipping and logistics, feel free to contact our support team at [techbidmarketplace@gmail.com] .
+For any inquiries regarding shipping and logistics, feel free to contact our support team at techbidmarketplace@gmail.com .
 
              
 """)
@@ -3281,7 +3281,7 @@ We do not sell or rent your personal information to third parties. However, we m
     st.write("""
 You have the right to:
 
-Access, update, or delete your personal information by [contacting us] (techbidmarketplace@gmail.com).
+Access, update, or delete your personal information by [contacting us](techbidmarketplace@gmail.com).
 
 Opt out of marketing communications at any time by clicking "unsubscribe" in the emails we send.
 
