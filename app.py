@@ -1923,7 +1923,7 @@ def bids_and_gadgets_page(category_filter=None):
                 
                 if product_code in expiry_times:   
 
-                    time_left = get_time_left(expiry_times[product_code], product_code)
+                    time_left = get_time_left1(expiry_times[product_code], product_code)
                     days = time_left.days
                     hours = time_left.seconds // 3600
                     minutes = (time_left.seconds % 3600) // 60
