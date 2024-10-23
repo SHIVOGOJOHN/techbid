@@ -721,13 +721,14 @@ def update_highest_bid(product_code, new_bid):
 def display_countdown_js(time_left, product_code, highest_bid):
     countdown_html = f"""
     <div class="countdown-highest-bid" style="display: inline-block; margin: 0; padding: 0;">
-        <div class="countdown-container" style="display: inline-block; margin: 0; padding: 0;">
-            <p class="countdown-label" style="display: inline-block; margin: 0; padding-right: 5px;"><strong>Time Left:</strong></p>
-            <p id="countdown-{product_code}" class="countdown-timer" style="display: inline-block; margin: 0; padding: 0;"></p>
-        </div>
-        <div class="highest-bid-container" style="display: inline-block; margin-left: 10px; padding: 0;">
-            <p style="display: inline-block; margin: 0; padding: 0;"><strong>Highest Bid:</strong> KSh {highest_bid}</p>
-        </div>
+      <div class="countdown-container" style="display: inline-block; margin: 0; padding: 0;">
+        <p class="countdown-label" style="display: inline-block; margin: 0; padding-right: 5px;"><strong>Time Left:</strong></p>
+        <p id="countdown-{product_code}" class="countdown-timer" style="display: inline-block; margin: 0; padding: 0;"></p>
+      </div>
+      <div class="highest-bid-container" style="display: inline-block; margin-left: 10px; padding: 0;">
+        <p style="display: inline-block; margin: 0; padding: 0;"><strong>Highest Bid:</strong></p>
+        <p class="highest-bid-amount" style="display: inline-block; margin: 0; padding: 0;">KSh {highest_bid}</p>
+      </div>
     </div>
     <script>
         var timeleft = {time_left};
@@ -1951,8 +1952,20 @@ def bids_and_gadgets_page(category_filter=None):
                    highest_bid = get_highest_bid(product_code)  # Get the dynamic highest bid
                    display_countdown_js(time_left, product_code, highest_bid)
 
+                   # Adjusting spacing between JavaScript section and bid button
+                st.write("")  # Empty string to remove auto spacing   
                     
                 bid_button_key = f"bid-button-{gadget['product code']}-{idx}-{gadget['name']}"
+                   st.markdown(
+                    f"""
+                    <div style="padding-top: 5px; margin: 0;">
+                        <form action="">
+                            <input type="number" style="width: 100%;" placeholder="Enter bid amount">
+                        </form>
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
 
 
                 # Toggle form visibility when button is clicked
