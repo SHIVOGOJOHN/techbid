@@ -61,7 +61,7 @@ def send_confirmation_email(email, name):
         smtp_server = 'smtp.gmail.com'
         smtp_port = 587
         sender_email = 'techbidmarketplace@gmail.com'  # Replace with your Gmail address
-        sender_password = "vnot dyyh plrw syag"  # Replace with your app password
+        sender_password = st.secrets["general"]["sender_password"] # Replace with your app password
 
         # Create the email content
         subject = 'Welcome to TechBid!'
@@ -94,7 +94,7 @@ def send_email(to_email, from_email, subject, message):
         smtp_server = 'smtp.gmail.com'  # For Gmail
         smtp_port = 587
         smtp_username = 'techbidmarketplace@gmail.com'  # Your email
-        smtp_password ="vnot dyyh plrw syag"
+        smtp_password = st.secrets["general"]["sender_password"]
    # Your email password (Consider using app-specific password for Gmail)
 
         # Create an email message object
@@ -168,7 +168,7 @@ def save_user_data(name, email, password, phone, address):
             connection_timeout=10,
             database="defaultdb",
             host="mysql-f3601b9-jonesjorney-bd4e.f.aivencloud.com",
-            password="AVNS_ERXe8j5gIX5yis97hnw",
+            password=st.secrets["general"]["password"],
             port=21038,
             user="avnadmin"
         )
@@ -204,7 +204,7 @@ def verify_user(email, password):
                 connection_timeout=10,
                 database="defaultdb",
                 host="mysql-f3601b9-jonesjorney-bd4e.f.aivencloud.com",
-                password="AVNS_ERXe8j5gIX5yis97hnw",
+                password=st.secrets["general"]["sender_password"],
                 port=21038,
                 user="avnadmin"
 
@@ -520,7 +520,7 @@ def save_bid(Fname, Lname, email, phone, bid_amount, product_code,product_name):
             connection_timeout=10,
             database="defaultdb",
             host="mysql-f3601b9-jonesjorney-bd4e.f.aivencloud.com",
-            password="AVNS_ERXe8j5gIX5yis97hnw",
+            password=st.secrets["general"]["password"],
             port=21038,
             user="avnadmin"    # Your MySQL password
         )
@@ -557,7 +557,7 @@ def save_bid(Fname, Lname, email, phone, bid_amount, product_code,product_name):
 ###########################################################
 def send_confirmation(email, Fname, Lname, bid_amount, product_name):
     sender_email = 'techbidmarketplace@gmail.com'
-    sender_password = "vnot dyyh plrw syag"  # Use app-specific password or environment variable for security
+    sender_password = st.secrets["general"]["sender_password"] # Use app-specific password or environment variable for security
     
     # Email body
     body = f"""
