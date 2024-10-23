@@ -53,6 +53,8 @@ if 'current_page' not in st.session_state:
 
 
 # Function to send confirmation email using Gmail SMTP
+
+# Function to send confirmation email using Gmail SMTP
 def send_confirmation_email(email, name):
     try:
         # Set up the email server
@@ -158,7 +160,6 @@ def hash_password(password):
     return hashlib.sha256(password.encode()).hexdigest()
 
 # Function to save new user data into the MySQL database
-
 def save_user_data(name, email, password, phone, address):
     try:
         # Connect to the MySQL database
@@ -196,7 +197,6 @@ def save_user_data(name, email, password, phone, address):
     except Exception as e:
         st.error("An error occurred. Please check your internet connection and try again.")
 
-             
 def verify_user(email, password):
     try:
         connection = mysql.connector.connect(
@@ -222,11 +222,6 @@ def verify_user(email, password):
     except mysql.connector.Error:
         st.error("Error checking email. Please try again later.")
         return False
-
-
-
-
-
 # Login page
 def login_page():
     st.title("Log In")
@@ -257,6 +252,8 @@ def login_page():
         else:
             # Display error message if login fails
             st.error("Invalid email or password.")
+             
+
 
 
 # Add CSS to style the "Sign Up" button
@@ -335,6 +332,7 @@ def signup_page():
                 else:
                     # Call the function to save user data to MySQL (replace with actual save logic)
                     save_user_data(name, email, password, phone, address)
+
 
 # Function to display the home page
 def home_page():
