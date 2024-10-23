@@ -12,6 +12,7 @@ import numpy as np
 import requests
 from requests.auth import HTTPBasicAuth
 import uuid
+from streamlit_autorefresh import st_autorefresh
 from datetime import datetime, timedelta  # Import directly
 import gridfs
 import io
@@ -594,9 +595,9 @@ The TechBid Team
 
 
 # Set how many hours or days to extend the countdown by once it reaches zero (for demo purposes)
-extension_period = timedelta(hours=72)  
 
 def get_time_left(expiry_time,product_code):
+    extension_period = timedelta(hours=72)  
     now = datetime.now()
     time_left = expiry_time - now
     if time_left.total_seconds() > 0:
@@ -607,6 +608,20 @@ def get_time_left(expiry_time,product_code):
         expiry_times[product_code] = new_expiry  # Update expiry time for this product
         return new_expiry - now  # Return new countdown
 
+
+def get_time_left1(expiry_time, product_code):
+    extension_period = timedelta(hours=72)  
+    now = datetime.now()  # Ensure you're getting the current time at each function call
+    time_left = expiry_time - now
+    
+    if time_left.total_seconds() > 0:
+        return time_left
+    else:
+        # When the countdown reaches zero, reset to a new expiry
+        new_expiry = now + extension_period
+        expiry_times[product_code] = new_expiry  # Update expiry time for this product
+        return new_expiry - now  # Return new countdown
+        
 expiry_times = {
     "p001": datetime(2024, 10, 11, 12, 0, 0),
     "p002": datetime(2024, 10, 11, 15, 30, 0),
@@ -1907,7 +1922,7 @@ def bids_and_gadgets_page(category_filter=None):
                 
                 if product_code in expiry_times:   
 
-                    time_left = get_time_left(expiry_times[product_code], product_code)
+                    time_left = get_time_left1(expiry_times[product_code], product_code)
                     days = time_left.days
                     hours = time_left.seconds // 3600
                     minutes = (time_left.seconds % 3600) // 60
@@ -1919,7 +1934,9 @@ def bids_and_gadgets_page(category_filter=None):
                     # Handle expired bids
                     if time_left.total_seconds() <= 0:
                         st.warning("Bid expired!")
-
+                        
+                    st_autorefresh(interval=60 * 1000, key="auto-refresh")
+                    
                      # Display highest bids
                 highest_bid = get_highest_bid(product_code)
                 st.write(f"**Highest Bid** : KSh {highest_bid}")
