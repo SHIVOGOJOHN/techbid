@@ -1981,7 +1981,7 @@ def bids_and_gadgets_page(category_filter=None):
                     unsafe_allow_html=True
                 )
 
-                st.write(f"**Highest Bid** : KSh {highest_bid}")
+
 
 
                 bid_button_key = f"bid-button-{gadget['product code']}-{idx}-{gadget['name']}"
