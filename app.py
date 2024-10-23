@@ -1,5 +1,4 @@
 import streamlit as st 
-from streamlit_lottie import st_lottie
 import mysql.connector
 from mysql.connector import Error
 import hashlib
@@ -13,13 +12,8 @@ import numpy as np
 import requests
 from requests.auth import HTTPBasicAuth
 import uuid
-import altair as alt 
 from mysql.connector import Error
 from datetime import datetime, timedelta  # Import directly
-import joblib
-from sklearn.preprocessing import LabelEncoder
-from  pymongo import MongoClient
-import pymongo
 import gridfs
 import io
 import random
@@ -1887,7 +1881,7 @@ def bids_and_gadgets_page(category_filter=None):
     # Simulate random bid increase between 1 and 10
     def simulate_random_bids():
         for product_code in st.session_state.highest_bids.keys():
-            random_increment = random.randint(1,5 )
+            random_increment = random.randint(1,5)
             new_highest_bid = st.session_state.highest_bids[product_code] + random_increment
             update_highest_bid(product_code, new_highest_bid)      
     
@@ -2011,7 +2005,6 @@ def bids_and_gadgets_page(category_filter=None):
 
 
 #search Engine
-@st.cache_data
 def search_bar():
     gadgets = [
         {
@@ -3096,7 +3089,12 @@ def search_bar():
 
                                     if payment_result:
                                         redirect_url = payment_result.get("redirect_url")
-                                        st.markdown(f"[👉Click here to complete bid.]({redirect_url})", unsafe_allow_html=True)
+                                        st.markdown(
+                                            f'<a href="{redirect_url}" target="_blank" rel="noopener noreferrer">'
+                                            f'<button style="background-color: #4CAF50; color: white; padding: 10px; border: none; cursor: pointer; border-radius: 8px;">'
+                                            f'Click here to complete your bid</button></a>',
+                                            unsafe_allow_html=True
+                                            )
                                     else:
                                         st.error("Bid failed. Please try again!")
                                 else:
@@ -3130,7 +3128,7 @@ st.markdown(
         """,
         unsafe_allow_html=True
     ) 
-@st.cache_data
+
 def generate_random_metrics():
         highest_bid = random.randint(100, 40000)  # Random highest bid between 1 and 100
         total_bids = random.randint(50, 200)  # Random total number of bids between 50 and 200
