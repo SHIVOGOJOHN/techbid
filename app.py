@@ -713,6 +713,7 @@ def get_time_left_in_seconds(expiry_time, product_code):
 def display_countdown_js(time_left, product_code):
     countdown_html = f"""
     <div>
+        <p><strong>Time Left:</strong></p>
         <p id="countdown-{product_code}"></p>
         <script>
             var timeleft = {time_left};
@@ -736,8 +737,7 @@ def display_countdown_js(time_left, product_code):
     """
     # Embed the HTML/JavaScript into the app
     components.html(countdown_html)
-
-
+    
 def bids_and_gadgets_page(category_filter=None):
     
 
