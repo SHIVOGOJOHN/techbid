@@ -202,7 +202,7 @@ def save_user_data(name, email, password, phone, address):
         st.error("An error occurred. Please check your internet connection and try again.")
 
 
- @st.cache_data              
+@st.cache_data              
 def verify_user(email, password):
     try:
         connection = mysql.connector.connect(
