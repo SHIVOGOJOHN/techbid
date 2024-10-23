@@ -713,9 +713,9 @@ def get_time_left_in_seconds(expiry_time, product_code):
 # Countdown display using JavaScript
 def display_countdown_js(time_left, product_code):
     countdown_html = f"""
-    <div style="display: inline-block; margin: 0px; padding: 0px; text-align: left;">
-        <p style="margin: 0px; padding: 0px; display: inline-block;"><strong>Time Left:</strong></p>
-        <p id="countdown-{product_code}" style="margin: 0px; padding: 0px; display: inline-block;"></p>
+    <div class="countdown-container">
+        <p class="countdown-label"><strong>Time Left:</strong></p>
+        <p id="countdown-{product_code}" class="countdown-timer"></p>
         <script>
             var timeleft = {time_left};
             var countdownTimer = setInterval(function() {{
@@ -738,8 +738,6 @@ def display_countdown_js(time_left, product_code):
     """
     # Embed the HTML/JavaScript into the app
     components.html(countdown_html)
-
-
     
 def bids_and_gadgets_page(category_filter=None):
     
@@ -1948,11 +1946,23 @@ def bids_and_gadgets_page(category_filter=None):
                     # CSS to remove space between "Time Left" and "Highest Bid"
                     st.markdown(
                         """<style>
-                        div[style="display: inline-block;"] {
+                        .countdown-container {
+                            display: flex;
+                            align-items: center;
                             margin: 0px !important;
                             padding: 0px !important;
                         }
-                        p {
+                        .countdown-label {
+                            margin: 0px !important;
+                            padding-right: 5px !important;
+                        }
+                        .countdown-timer {
+                            margin: 0px !important;
+                            padding: 0px !important;
+                        }
+                        .highest-bid-container {
+                            display: flex;
+                            align-items: center;
                             margin: 0px !important;
                             padding: 0px !important;
                         }
@@ -1960,9 +1970,17 @@ def bids_and_gadgets_page(category_filter=None):
                         unsafe_allow_html=True
                     )
 
-                    
                      # Display highest bids
                 highest_bid = get_highest_bid(product_code)
+                st.markdown(
+                    f"""
+                    <div class="highest-bid-container">
+                        <p><strong>Highest Bid:</strong> KSh {highest_bid}</p>
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
+
                 st.write(f"**Highest Bid** : KSh {highest_bid}")
 
 
