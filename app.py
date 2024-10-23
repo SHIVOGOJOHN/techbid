@@ -3215,8 +3215,6 @@ def about_us():
     """,
     unsafe_allow_html=True,
 )
-    # About Page Content
-    st.markdown('<div class="about-header">About TechBid</div>', unsafe_allow_html=True)
 
 # Introduction
     st.markdown('<div class="about-section"><strong>Welcome to TechBid!</strong> We are an innovative online bidding platform dedicated to helping you find the best deals on mobile and computer gadgets. Our mission is to create a fun and engaging environment where users can bid on the latest tech products and save money in the process!</div>', unsafe_allow_html=True)
