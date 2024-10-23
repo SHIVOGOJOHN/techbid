@@ -3138,7 +3138,6 @@ def generate_random_metrics():
         return highest_bid, total_bids
 
 # Function to update the user count and delta
-@st.cache_data
 def update_user_metrics():
     if "users_count" not in st.session_state:
         st.session_state.users_count = 2103  # Initial users count
