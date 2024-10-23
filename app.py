@@ -1926,7 +1926,8 @@ def bids_and_gadgets_page(category_filter=None):
                     time_left = get_time_left_in_seconds(expiry_times[product_code], product_code)
                     display_countdown_js(time_left, product_code)
                     # Handle expired bids
-                    if time_left.total_seconds() <= 0:
+                    
+                    if time_left <= 0:
                         st.warning("Bid expired!")
                         
                     
