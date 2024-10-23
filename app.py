@@ -713,9 +713,9 @@ def get_time_left_in_seconds(expiry_time, product_code):
 # Countdown display using JavaScript
 def display_countdown_js(time_left, product_code):
     countdown_html = f"""
-    <div style="margin-bottom: 0px;">
-        <p><strong>Time Left:</strong></p>
-        <p id="countdown-{product_code}" style="margin-bottom: 0px;"></p>
+    <div style="display: flex; flex-direction: column; align-items: flex-start; margin-bottom: 0px; padding-bottom: 0px;">
+        <p style="margin: 0px; padding: 0px;"><strong>Time Left:</strong></p>
+        <p id="countdown-{product_code}" style="margin: 0px; padding: 0px;"></p>
         <script>
             var timeleft = {time_left};
             var countdownTimer = setInterval(function() {{
@@ -738,6 +738,7 @@ def display_countdown_js(time_left, product_code):
     """
     # Embed the HTML/JavaScript into the app
     components.html(countdown_html)
+
 
     
 def bids_and_gadgets_page(category_filter=None):
@@ -1947,14 +1948,17 @@ def bids_and_gadgets_page(category_filter=None):
                     # CSS to remove space between "Time Left" and "Highest Bid"
                     st.markdown(
                         """<style>
-                        div[style="margin-bottom: 0px;"] {
+                        div[style="display: flex; flex-direction: column; align-items: flex-start; margin-bottom: 0px; padding-bottom: 0px;"] {
                             margin-bottom: 0px;
                             padding-bottom: 0px;
+                        }
+                        p {
+                            margin: 0px !important;
+                            padding: 0px !important;
                         }
                         </style>""",
                         unsafe_allow_html=True
                     )
-
                     
                      # Display highest bids
                 highest_bid = get_highest_bid(product_code)
