@@ -314,11 +314,11 @@ def signup_page():
     if not st.session_state.signup_submitted:
         with st.form(key=st.session_state.signup_form_key):
             name = st.text_input("Full Name")
-            email = st.text_input("Email Address")
+            email = st.text_input("Email Address",type='email')
             password = st.text_input("Password", type='password')
 
             # Additional fields with unique keys
-            st.markdown("### Additional Information")
+            #st.markdown("### Additional Information")
             phone = st.text_input("Phone Number")
             address = st.text_input("Address")
 
