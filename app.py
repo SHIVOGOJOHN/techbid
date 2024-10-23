@@ -718,16 +718,11 @@ def update_highest_bid(product_code, new_bid):
         st.session_state.highest_bids[product_code] = new_bid 
         
 # Countdown display using JavaScript
-def display_countdown_js(time_left, product_code, highest_bid):
+def display_countdown_js(time_left, product_code):
     countdown_html = f"""
-    <div class="countdown-highest-bid" style="display: inline-block; margin: 0; padding: 0;">
-        <div class="countdown-container" style="display: inline-block; margin: 0; padding: 0;">
-            <p class="countdown-label" style="display: inline-block; margin: 0; padding-right: 5px;"><strong>Time Left:</strong></p>
-            <p id="countdown-{product_code}" class="countdown-timer" style="display: inline-block; margin: 0; padding: 0;"></p>
-        </div>
-        <div class="highest-bid-container" style="display: inline-block; margin-left: 10px; padding: 0;">
-            <p style="display: inline-block; margin: 0; padding: 0;"><strong>Highest Bid:</strong> KSh {highest_bid}</p>
-        </div>
+    <div style="display: flex; flex-direction: row; align-items: center; margin-bottom: 0;">
+        <p style="margin-right: 10px; font-weight: bold;">Time Left:</p>
+        <p id="countdown-{product_code}" style="margin-bottom: 0;"></p>
     </div>
     <script>
         var timeleft = {time_left};
@@ -751,6 +746,12 @@ def display_countdown_js(time_left, product_code, highest_bid):
     # Embed the HTML/JavaScript into the app
     components.html(countdown_html)
 
+# Display the "Highest Bid" right below the countdown in the same layout
+def display_highest_bid(highest_bid):
+    st.markdown(
+        f"<div style='margin-bottom: 0;'><strong>Highest Bid: </strong>KSh {highest_bid}</div>", 
+        unsafe_allow_html=True
+    )
 
 def bids_and_gadgets_page(category_filter=None):
     
@@ -1949,8 +1950,9 @@ def bids_and_gadgets_page(category_filter=None):
                 
                 if product_code in expiry_times:   
                    time_left = get_time_left_in_seconds(expiry_times[product_code], product_code)
-                   highest_bid = get_highest_bid(product_code)  # Get the dynamic highest bid
-                   display_countdown_js(time_left, product_code, highest_bid)
+                   display_countdown_js(time_left, product_code)
+                   highest_bid = get_highest_bid(product_code)
+                   display_highest_bid(highest_bid)
 
                     
                 bid_button_key = f"bid-button-{gadget['product code']}-{idx}-{gadget['name']}"
