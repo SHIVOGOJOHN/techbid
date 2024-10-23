@@ -2045,10 +2045,10 @@ def search_bar():
             "category":  "Tv and Audio",
         },
          {
-            "name":"Apple iPhone 15 Pro Max",
-            "image":"1 (6).jpg",
-            "description":"6.7‑inch (diagonal) all‑screen OLED display1, 256GB Storage256GB Storage, Action ButtonAction Button, USB-C Charge Cable capable4,Enabled by TrueDepth camera for facil recognition,",
-            "price": 2299,
+            "name":"Blackview A52 Pro",
+            "image":r"https://ke.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/29/0992572/1.jpg?7074",
+            "description":" 6.5-Inch (4GB RAM + 128GB ROM) - 13MP Camera, 5180mAh Battery - 4G, Polar Night",
+            "price":1599 ,
             "product code": "p004",
             "ko_fi_link": "https://ko-fi.com/techbidmarket",
             "mpesa_link": "**Pochi La Biashara/Send Money:** 0704234829"
