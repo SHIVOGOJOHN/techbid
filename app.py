@@ -592,6 +592,21 @@ The TechBid Team
         print(f"Error: {e}. Check Internet connection and try again!")
         return False         
 
+
+# Set how many hours or days to extend the countdown by once it reaches zero (for demo purposes)
+extension_period = timedelta(hours=72)  
+
+def get_time_left(expiry_time,product_code):
+    now = datetime.now()
+    time_left = expiry_time - now
+    if time_left.total_seconds() > 0:
+        return time_left
+    else:
+        # When the countdown reaches zero, reset to a new expiry
+        new_expiry = now + extension_period
+        expiry_times[product_code] = new_expiry  # Update expiry time for this product
+        return new_expiry - now  # Return new countdown
+
 expiry_times = {
     "p001": datetime(2024, 10, 11, 12, 0, 0),
     "p002": datetime(2024, 10, 11, 15, 30, 0),
@@ -689,8 +704,6 @@ expiry_times = {
     "c020": datetime(2024, 10, 11, 10, 0, 0),
 }
     
-# Set how many hours or days to extend the countdown by once it reaches zero (for demo purposes)
-extension_period = timedelta(hours=72)  
 
 
 
@@ -1868,27 +1881,6 @@ def bids_and_gadgets_page(category_filter=None):
             update_highest_bid(product_code, new_highest_bid)      
     
     simulate_random_bids()
-    def get_time_left(expiry_time, product_code):
-        now = datetime.now()
-        
-        # Check if the product code exists in the expiry_times dictionary
-        if product_code not in expiry_times:
-            # Set a default expiry time if product_code is not found
-            expiry_times[product_code] = now + extension_period
-        
-        # Fetch the expiry time
-        expiry_time = expiry_times[product_code]
-        time_left = expiry_time - now
-        
-        # If time is still left, return it
-        if time_left.total_seconds() > 0:
-            return time_left
-        else:
-            # When the countdown reaches zero, reset to a new expiry
-            new_expiry = now + extension_period
-            expiry_times[product_code] = new_expiry  # Update expiry time for this product
-            return new_expiry - now  # Return new countdown
-
     # Display products in columns and rows
     for idx, gadget in enumerate(filtered_gadgets):
         col_idx = idx % 4  # Get column index
