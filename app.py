@@ -709,48 +709,6 @@ def get_time_left_in_seconds(expiry_time, product_code):
     time_left = expiry_time - now
     return int(time_left.total_seconds())
 
-def get_highest_bid(product_code):
-    return st.session_state.highest_bids.get(product_code, 0)
-
-                # Update the highest bid after each successful bid
-def update_highest_bid(product_code, new_bid):
-    if new_bid > st.session_state.highest_bids[product_code]:
-        st.session_state.highest_bids[product_code] = new_bid 
-        
-# Countdown display using JavaScript
-def display_countdown_js(time_left, product_code, highest_bid):
-    countdown_html = f"""
-    <div class="countdown-highest-bid" style="display: inline-block; margin: 0; padding: 0;">
-      <div class="countdown-container" style="display: inline-block; margin: 0; padding: 0;">
-        <p class="countdown-label" style="display: inline-block; margin: 0; padding-right: 5px;"><strong>Time Left:</strong></p>
-        <p id="countdown-{product_code}" class="countdown-timer" style="display: inline-block; margin: 0; padding: 0;"></p>
-      </div>
-      <div class="highest-bid-container" style="display: inline-block; margin-left: 10px; padding: 0;">
-        <p style="display: inline-block; margin: 0; padding: 0;"><strong>Highest Bid:</strong></p>
-        <p class="highest-bid-amount" style="display: inline-block; margin: 0; padding: 0;">KSh {highest_bid}</p>
-      </div>
-    </div>
-    <script>
-        var timeleft = {time_left};
-        var countdownTimer = setInterval(function() {{
-            var hours = Math.floor((timeleft % (3600 * 24)) / 3600);
-            var minutes = Math.floor((timeleft % 3600) / 60);
-            var seconds = timeleft % 60;
-
-            document.getElementById("countdown-{product_code}").innerHTML = 
-                hours + "h " + minutes + "m " + seconds + "s ";
-
-            timeleft--;
-
-            if (timeleft <= 0) {{
-                clearInterval(countdownTimer);
-                document.getElementById("countdown-{product_code}").innerHTML = "Bid expired!";
-            }}
-        }}, 1000);
-    </script>
-    """
-    # Embed the HTML/JavaScript into the app
-    components.html(countdown_html)
 
 def bids_and_gadgets_page(category_filter=None):
     
@@ -1948,20 +1906,23 @@ def bids_and_gadgets_page(category_filter=None):
                 product_code = gadget["product code"]
                 
                 if product_code in expiry_times:   
-                   time_left = get_time_left_in_seconds(expiry_times[product_code], product_code)
-                   highest_bid = get_highest_bid(product_code)  # Get the dynamic highest bid
-                   display_countdown_js(time_left, product_code, highest_bid)
-                    
+                   time_left = get_time_left(expiry_times[product_code], product_code)
+                   days = time_left.days
+                   hours = time_left.seconds // 3600
+                   minutes = (time_left.seconds % 3600) // 60
+                   seconds = time_left.seconds % 60
+    
+                   # Display countdown timer
+                   st.metric("**Time Left**", f"{days}d {hours}h {minutes}m ")
+    
+                   # Handle expired bids
+                   if time_left.total_seconds() <= 0:
+                        st.warning("Bid expired!")
+    
+                     # Display highest bids
+                highest_bid = get_highest_bid(product_code)
+                st.write(f"**Highest Bid** : KSh {highest_bid}")
                 
-                
-                st.markdown(
-                    f"""
-                    <form action="">
-                        <input type="number" style="width: 100%; margin: 0; padding: 0;">
-                    </form>
-                    """,
-                    unsafe_allow_html=True
-                )
                 bid_button_key = f"bid-button-{gadget['product code']}-{idx}-{gadget['name']}"   
                 # Toggle form visibility when button is clicked
                 if st.button(f"Bid for {gadget['name']}", key=bid_button_key):
