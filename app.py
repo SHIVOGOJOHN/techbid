@@ -1952,10 +1952,7 @@ def bids_and_gadgets_page(category_filter=None):
                    highest_bid = get_highest_bid(product_code)  # Get the dynamic highest bid
                    display_countdown_js(time_left, product_code, highest_bid)
 
-                    # Handle expired bids                   
-                    if time_left <= 0:
-                        st.warning("Bid expired!")
-                        
+                    
                 bid_button_key = f"bid-button-{gadget['product code']}-{idx}-{gadget['name']}"
 
 
