@@ -1942,7 +1942,17 @@ def bids_and_gadgets_page(category_filter=None):
                     if time_left <= 0:
                         st.warning("Bid expired!")
                         
-                    
+                    # CSS to remove space between "Time Left" and "Highest Bid"
+                    st.markdown(
+                        """<style>
+                        div[style="margin-bottom: 0px;"] {
+                            margin-bottom: 0px;
+                            padding-bottom: 0px;
+                        }
+                        </style>""",
+                        unsafe_allow_html=True
+                    )
+
                     
                      # Display highest bids
                 highest_bid = get_highest_bid(product_code)
