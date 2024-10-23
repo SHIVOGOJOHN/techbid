@@ -1851,7 +1851,7 @@ def bids_and_gadgets_page(category_filter=None):
         }
     
     # Function to get the current highest bid for a product
-    @st.cache_data
+    
     def get_highest_bid(product_code):
         return st.session_state.highest_bids.get(product_code, 0)
 
