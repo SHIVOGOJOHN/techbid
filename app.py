@@ -724,9 +724,9 @@ def bids_and_gadgets_page(category_filter=None):
     st.subheader("Hot This Week")
     gadgets = [
         {
-            "name": "XIAOMI Redmi A3, 6.71",
+            "name": "XIAOMI Redmi A3",
             "image": "1 (3).jpg",
-            "description": "4GB RAM +128GB (Dual SIM), 5000mAh, Midnight Black (Newest Model)",
+            "description": "6.71 inches ,4GB RAM +128GB (Dual SIM), 5000mAh, Midnight Black (Newest Model)",
             "price": 1599,
             "product code": "p001",
             "ko_fi_link": "https://ko-fi.com/techbidmarket",  # Replace with your Ko-fi link
@@ -744,8 +744,17 @@ def bids_and_gadgets_page(category_filter=None):
             "name": "Itel S24",
             "image": "1 (5).jpg",
             "description": "6.6'', 128GB + 4GB (Extended UPTO 8GB) RAM, 5000mAh, Dawn White (1YR WRTY)",
-            "price": 1599,
+            "price": 1799,
             "product code": "p003",
+            "ko_fi_link": "https://ko-fi.com/techbidmarket",
+            "mpesa_link": "**Pochi La Biashara/Send Money:** 0704234829"
+        },
+        {
+            "name":"Blackview A52 Pro",
+            "image":r"https://ke.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/29/0992572/1.jpg?7074",
+            "description":" 6.5-Inch (4GB RAM + 128GB ROM) - 13MP Camera, 5180mAh Battery - 4G, Polar Night",
+            "price":1599 ,
+            "product code": "p004",
             "ko_fi_link": "https://ko-fi.com/techbidmarket",
             "mpesa_link": "**Pochi La Biashara/Send Money:** 0704234829"
         },
@@ -756,15 +765,6 @@ def bids_and_gadgets_page(category_filter=None):
             "price": 2199,
             "product code": "s020",
             "category":  "Tv and Audio",
-        },
-         {
-            "name":"Apple iPhone 15 Pro Max",
-            "image":"1 (6).jpg",
-            "description":"6.7‑inch (diagonal) all‑screen OLED display1, 256GB Storage256GB Storage, Action ButtonAction Button, USB-C Charge Cable capable4,Enabled by TrueDepth camera for facil recognition,",
-            "price": 2299,
-            "product code": "p004",
-            "ko_fi_link": "https://ko-fi.com/techbidmarket",
-            "mpesa_link": "**Pochi La Biashara/Send Money:** 0704234829"
         },
         {
             "name": "Samsung Galaxy S24 Ultra",
@@ -1757,8 +1757,8 @@ def bids_and_gadgets_page(category_filter=None):
         st.session_state.highest_bids = {
             "p001": 1599,  
             "p002": 1099,
-            "p003": 1599,
-            "p004": 2299,  
+            "p003": 1799,
+            "p004": 1599,  
             "p005": 2199,
             "p006": 1899,  
             "p007": 1199,
@@ -1904,7 +1904,7 @@ def bids_and_gadgets_page(category_filter=None):
         
                 st.image(gadget["image"], use_column_width=True)
                 st.subheader(gadget["name"])
-                st.write(f"**Price**: KSh {gadget['price']}")
+                st.write(f"**Bid Price**: KSh {gadget['price']}")
                 st.write(f"**Description**: {gadget['description']}")
                 #st.write(f"**Product code**: {gadget['product code']}")
                 
