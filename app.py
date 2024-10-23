@@ -1947,47 +1947,9 @@ def bids_and_gadgets_page(category_filter=None):
                     if time_left <= 0:
                         st.warning("Bid expired!")
                         
-                    # CSS to remove space between "Time Left" and "Highest Bid"
-                    st.markdown(
-                        """<style>
-                        .countdown-container {
-                            display: flex;
-                            align-items: center;
-                            margin: 0px !important;
-                            padding: 0px !important;
-                        }
-                        .countdown-label {
-                            margin: 0px !important;
-                            padding-right: 5px !important;
-                        }
-                        .countdown-timer {
-                            margin: 0px !important;
-                            padding: 0px !important;
-                        }
-                        .highest-bid-container {
-                            display: flex;
-                            align-items: center;
-                            margin: 0px !important;
-                            padding: 0px !important;
-                        }
-                        </style>""",
-                        unsafe_allow_html=True
-                    )
-
-                     # Display highest bids
+                    
                 highest_bid = get_highest_bid(product_code)
-                st.markdown(
-                    f"""
-                    <div class="highest-bid-container">
-                        <p><strong>Highest Bid:</strong> KSh {highest_bid}</p>
-                    </div>
-                    """,
-                    unsafe_allow_html=True
-                )
-
-
-
-
+            
                 bid_button_key = f"bid-button-{gadget['product code']}-{idx}-{gadget['name']}"
 
 
