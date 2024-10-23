@@ -886,6 +886,7 @@ def get_time_left(expiry_time, product_code):
     expiry_time = expiry_times[product_code]
     time_left = expiry_time - now
     
+    # If time is still left, return it
     if time_left.total_seconds() > 0:
         return time_left
     else:
@@ -893,8 +894,7 @@ def get_time_left(expiry_time, product_code):
         new_expiry = now + extension_period
         expiry_times[product_code] = new_expiry  # Update expiry time for this product
         return new_expiry - now  # Return new countdown
-   
-    
+
 #########################################
 def bids_and_gadgets_page(category_filter=None):
     
@@ -2091,6 +2091,7 @@ def bids_and_gadgets_page(category_filter=None):
 
                 product_code=gadget['product code']
                 product_name=gadget["name"]
+                
                 if product_code in expiry_times:   
 
                     time_left = get_time_left(expiry_times.get(product_code, datetime.now()), product_code)
