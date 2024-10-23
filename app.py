@@ -27,7 +27,6 @@ st.set_page_config(page_title="Techbid Marketplace")
 
 
 # Function to generate custom product IDs based on the ranges provided
-@st.cache_data
 def generate_product_id():
     prefixes = {
         'p': range(1, 21),     # p001 to p020
@@ -54,7 +53,6 @@ if 'current_page' not in st.session_state:
 
 
 # Function to send confirmation email using Gmail SMTP
-@st.cache_data
 def send_confirmation_email(email, name):
     try:
         # Set up the email server
@@ -88,7 +86,6 @@ def send_confirmation_email(email, name):
 
 
 # Function to send email
-@st.cache_data
 def send_email(to_email, from_email, subject, message):
     try:
         # Set up your SMTP server
@@ -116,7 +113,6 @@ def send_email(to_email, from_email, subject, message):
         return None
 
 # Function to display the customer support form
-@st.cache_data
 def customer_support_page():
     st.title("Customer Support")
 
@@ -158,12 +154,11 @@ def customer_support_page():
 
 
 # Function to hash passwords
-@st.cache_data
 def hash_password(password):
     return hashlib.sha256(password.encode()).hexdigest()
 
 # Function to save new user data into the MySQL database
-@st.cache_data
+
 def save_user_data(name, email, password, phone, address):
     try:
         # Connect to the MySQL database
@@ -201,8 +196,7 @@ def save_user_data(name, email, password, phone, address):
     except Exception as e:
         st.error("An error occurred. Please check your internet connection and try again.")
 
-
-@st.cache_data              
+             
 def verify_user(email, password):
     try:
         connection = mysql.connector.connect(
@@ -307,7 +301,7 @@ st.markdown(
 )
 
 
-@st.cache_data
+
 def signup_page():
     st.title("Sign Up for TechBid")
 
@@ -520,7 +514,6 @@ st.markdown(
 </style>
 """, unsafe_allow_html=True)
  
-@st.cache_data
 def save_bid(Fname, Lname, email, phone, bid_amount, product_code,product_name):
     try:
             
@@ -564,7 +557,6 @@ def save_bid(Fname, Lname, email, phone, bid_amount, product_code,product_name):
 
             
 ###########################################################
-@st.cache_data
 def send_confirmation(email, Fname, Lname, bid_amount, product_name):
     sender_email = 'techbidmarketplace@gmail.com'
     sender_password = "vnot dyyh plrw syag"  # Use app-specific password or environment variable for security
@@ -1859,6 +1851,7 @@ def bids_and_gadgets_page(category_filter=None):
         }
     
     # Function to get the current highest bid for a product
+    @st.cache_data
     def get_highest_bid(product_code):
         return st.session_state.highest_bids.get(product_code, 0)
 
@@ -3205,7 +3198,7 @@ For any inquiries regarding shipping and logistics, feel free to contact our sup
 
              
 """)
-@st.cache_data
+
 def about_us():
     st.subheader("About Us")
 # Css for the about page 
@@ -3345,16 +3338,16 @@ You agree not to engage in any behavior that disrupts or interferes with the app
     st.markdown("For inquiries, feel free to [email us](techbidmarketplace.com).")
 
 # Categories filters by product code
-@st.cache_data
+
 def category_filter_phones_tablets(code):
     return code.startswith('p') or code.startswith('t')
-@st.cache_data
+
 def category_filter_computing(code):
     return code.startswith('c')
-@st.cache_data
+
 def category_filter_tv_audio(code):
     return code.startswith('s')
-@st.cache_data
+
 def category_filter_appliances(code):
     return code.startswith('a')
 
