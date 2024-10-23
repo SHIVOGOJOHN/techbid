@@ -689,13 +689,26 @@ expiry_times = {
     "c020": datetime(2024, 10, 11, 10, 0, 0),
 }
 
-# Function to calculate time left for each product
+# Set the expiration date to 1st December 2024
+expiry_date = datetime(2024, 12, 1, 0, 0, 0)
+
+# Update the expiry_times dictionary
+expiry_times = {key: expiry_date for key in expiry_times.keys()}
+
+# Function to check if 24 hours have passed and reset the expiry time
+def check_and_reset_expiry(product_code):
+    now = datetime.now()
+    # If the current time is past the expiry time, reset to 24 hours from now
+    if now >= expiry_times[product_code]:
+        expiry_times[product_code] = now + timedelta(days=1)
+
 # Get the remaining time for a product in seconds
 def get_time_left_in_seconds(expiry_time, product_code):
+    check_and_reset_expiry(product_code)  # Check and reset expiry time if necessary
     now = datetime.now()
     time_left = expiry_time - now
     return int(time_left.total_seconds())
-    
+
 # Countdown display using JavaScript
 def display_countdown_js(time_left, product_code):
     countdown_html = f"""
@@ -704,13 +717,12 @@ def display_countdown_js(time_left, product_code):
         <script>
             var timeleft = {time_left};
             var countdownTimer = setInterval(function() {{
-                var days = Math.floor(timeleft / (3600 * 24));
                 var hours = Math.floor((timeleft % (3600 * 24)) / 3600);
                 var minutes = Math.floor((timeleft % 3600) / 60);
                 var seconds = timeleft % 60;
 
                 document.getElementById("countdown-{product_code}").innerHTML = 
-                    days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+                    hours + "h " + minutes + "m " + seconds + "s ";
 
                 timeleft--;
 
