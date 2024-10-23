@@ -2049,10 +2049,6 @@ def bids_and_gadgets_page(category_filter=None):
             "c024": 2299,
             "c025": 384
         }
-       
-    
-    product_name=gadget["name"]
-    product_code = gadget["product code"]
     
     # Function to get the current highest bid for a product
     def get_highest_bid(product_code):
