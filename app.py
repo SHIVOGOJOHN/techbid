@@ -1,5 +1,5 @@
 import streamlit as st 
-import streamlit.components.v1 as components
+from streamlit_lottie import st_lottie
 import mysql.connector
 from mysql.connector import Error
 import hashlib
@@ -13,12 +13,18 @@ import numpy as np
 import requests
 from requests.auth import HTTPBasicAuth
 import uuid
+import altair as alt 
+from mysql.connector import Error
 from datetime import datetime, timedelta  # Import directly
+import joblib
+from sklearn.preprocessing import LabelEncoder
+from  pymongo import MongoClient
+import pymongo
 import gridfs
 import io
 import random
+import pathlib
 import string
-
 
 # Set up page configuration only once
 st.set_page_config(page_title="Techbid Marketplace")
