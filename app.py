@@ -2089,7 +2089,8 @@ def bids_and_gadgets_page(category_filter=None):
                 #st.write(f"**Product code**: {gadget['product code']}")
 
 
-
+                product_code=gadget['product code']
+                product_name=gadget["name"]
                 if product_code in expiry_times:   
 
                     time_left = get_time_left(expiry_times.get(product_code, datetime.now()), product_code)
