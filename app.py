@@ -2031,7 +2031,7 @@ def search_bar():
             "name": "Itel S24",
             "image": "1 (5).jpg",
             "description": "6.6'', 128GB + 4GB (Extended UPTO 8GB) RAM, 5000mAh, Dawn White (1YR WRTY)",
-            "price": 1599,
+            "price": 1799,
             "product code": "p003",
             "ko_fi_link": "https://ko-fi.com/techbidmarket",
             "mpesa_link": "**Pochi La Biashara/Send Money:** 0704234829"
