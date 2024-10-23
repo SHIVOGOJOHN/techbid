@@ -713,32 +713,36 @@ def get_time_left_in_seconds(expiry_time, product_code):
 # Countdown display using JavaScript
 def display_countdown_js(time_left, product_code):
     countdown_html = f"""
-    <div class="countdown-container">
-        <p class="countdown-label"><strong>Time Left:</strong></p>
-        <p id="countdown-{product_code}" class="countdown-timer"></p>
-        <script>
-            var timeleft = {time_left};
-            var countdownTimer = setInterval(function() {{
-                var hours = Math.floor((timeleft % (3600 * 24)) / 3600);
-                var minutes = Math.floor((timeleft % 3600) / 60);
-                var seconds = timeleft % 60;
-
-                document.getElementById("countdown-{product_code}").innerHTML = 
-                    hours + "h " + minutes + "m " + seconds + "s ";
-
-                timeleft--;
-
-                if (timeleft <= 0) {{
-                    clearInterval(countdownTimer);
-                    document.getElementById("countdown-{product_code}").innerHTML = "Bid expired!";
-                }}
-            }}, 1000);
-        </script>
+    <div class="countdown-highest-bid" style="display: inline-block; margin: 0; padding: 0;">
+        <div class="countdown-container" style="display: inline-block; margin: 0; padding: 0;">
+            <p class="countdown-label" style="display: inline-block; margin: 0; padding-right: 5px;"><strong>Time Left:</strong></p>
+            <p id="countdown-{product_code}" class="countdown-timer" style="display: inline-block; margin: 0; padding: 0;"></p>
+        </div>
+        <div class="highest-bid-container" style="display: inline-block; margin-left: 10px; padding: 0;">
+            <p style="display: inline-block; margin: 0; padding: 0;"><strong>Highest Bid:</strong> KSh {{highest_bid}}</p>
+        </div>
     </div>
+    <script>
+        var timeleft = {time_left};
+        var countdownTimer = setInterval(function() {{
+            var hours = Math.floor((timeleft % (3600 * 24)) / 3600);
+            var minutes = Math.floor((timeleft % 3600) / 60);
+            var seconds = timeleft % 60;
+
+            document.getElementById("countdown-{product_code}").innerHTML = 
+                hours + "h " + minutes + "m " + seconds + "s ";
+
+            timeleft--;
+
+            if (timeleft <= 0) {{
+                clearInterval(countdownTimer);
+                document.getElementById("countdown-{product_code}").innerHTML = "Bid expired!";
+            }}
+        }}, 1000);
+    </script>
     """
     # Embed the HTML/JavaScript into the app
     components.html(countdown_html)
-    
 def bids_and_gadgets_page(category_filter=None):
     
 
