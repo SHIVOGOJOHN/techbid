@@ -697,12 +697,12 @@ def get_time_left_in_seconds(expiry_time, product_code):
     return int(time_left.total_seconds())
     
 # Countdown display using JavaScript
-def display_countdown_js(time_left_seconds, product_code):
+def display_countdown_js(time_left, product_code):
     countdown_html = f"""
     <div>
         <p id="countdown-{product_code}"></p>
         <script>
-            var timeleft = {time_left_seconds};
+            var timeleft = {time_left};
             var countdownTimer = setInterval(function() {{
                 var days = Math.floor(timeleft / (3600 * 24));
                 var hours = Math.floor((timeleft % (3600 * 24)) / 3600);
@@ -1923,14 +1923,14 @@ def bids_and_gadgets_page(category_filter=None):
                 
                 if product_code in expiry_times:   
 
-                    time_left_seconds = get_time_left_in_seconds(expiry_times[product_code], product_code)
+                    time_left = get_time_left_in_seconds(expiry_times[product_code], product_code)
                     days = time_left.days
                     hours = time_left.seconds // 3600
                     minutes = (time_left.seconds % 3600) // 60
                     seconds = time_left.seconds % 60
                     
                     # Display countdown timer
-                    display_countdown_js(time_left_seconds, product_code)
+                    display_countdown_js(time_left, product_code)
 
                     # Handle expired bids
                     if time_left.total_seconds() <= 0:
