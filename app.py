@@ -1,4 +1,5 @@
 import streamlit as st 
+import streamlit.components.v1 as components
 import mysql.connector
 from mysql.connector import Error
 import hashlib
@@ -12,13 +13,10 @@ import numpy as np
 import requests
 from requests.auth import HTTPBasicAuth
 import uuid
-from streamlit_autorefresh import st_autorefresh
-from datetime import timedelta  # Import directly
-import datetime
+from datetime import datetime, timedelta  # Import directly
 import gridfs
 import io
 import random
-import pathlib
 import string
 
 
@@ -593,37 +591,7 @@ The TechBid Team
     except Exception as e:
         print(f"Error: {e}. Check Internet connection and try again!")
         return False         
-
-
-# Set how many hours or days to extend the countdown by once it reaches zero (for demo purposes)
-
-def get_time_left(expiry_time,product_code):
-    extension_period = timedelta(hours=72)  
-    now = datetime.now()
-    time_left = expiry_time - now
-    if time_left.total_seconds() > 0:
-        return time_left
-    else:
-        # When the countdown reaches zero, reset to a new expiry
-        new_expiry = now + extension_period
-        expiry_times[product_code] = new_expiry  # Update expiry time for this product
-        return new_expiry - now  # Return new countdown
-
-
-def get_time_left1(expiry_time, product_code):
-    extension_period = timedelta(hours=72)  
-    now = datetime.now()  # Ensure you're getting the current time at each function call
-    time_left = expiry_time - now
-    
-    if time_left.total_seconds() > 0:
-        return time_left
-    else:
-        # When the countdown reaches zero, reset to a new expiry
-        new_expiry = now + extension_period
-        expiry_times[product_code] = new_expiry  # Update expiry time for this product
-        return new_expiry - now  # Return new countdown
-        
-st_autorefresh(interval=60 * 1000, key="auto-refresh")       
+     
 expiry_times = {
     "p001": datetime(2024, 10, 11, 12, 0, 0),
     "p002": datetime(2024, 10, 11, 15, 30, 0),
@@ -720,11 +688,43 @@ expiry_times = {
     "c019": datetime(2024, 10, 12, 10, 0, 0),
     "c020": datetime(2024, 10, 11, 10, 0, 0),
 }
+
+# Function to calculate time left for each product
+# Get the remaining time for a product in seconds
+def get_time_left_in_seconds(expiry_time, product_code):
+    now = datetime.now()
+    time_left = expiry_time - now
+    return int(time_left.total_seconds())
     
+# Countdown display using JavaScript
+def display_countdown_js(time_left_seconds, product_code):
+    countdown_html = f"""
+    <div>
+        <p id="countdown-{product_code}"></p>
+        <script>
+            var timeleft = {time_left_seconds};
+            var countdownTimer = setInterval(function() {{
+                var days = Math.floor(timeleft / (3600 * 24));
+                var hours = Math.floor((timeleft % (3600 * 24)) / 3600);
+                var minutes = Math.floor((timeleft % 3600) / 60);
+                var seconds = timeleft % 60;
 
+                document.getElementById("countdown-{product_code}").innerHTML = 
+                    days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
 
+                timeleft--;
 
-#########################################
+                if (timeleft <= 0) {{
+                    clearInterval(countdownTimer);
+                    document.getElementById("countdown-{product_code}").innerHTML = "Bid expired!";
+                }}
+            }}, 1000);
+        </script>
+    </div>
+    """
+    # Embed the HTML/JavaScript into the app
+    components.html(countdown_html)
+
 
 def bids_and_gadgets_page(category_filter=None):
     
@@ -1923,20 +1923,20 @@ def bids_and_gadgets_page(category_filter=None):
                 
                 if product_code in expiry_times:   
 
-                    time_left = get_time_left1(expiry_times[product_code], product_code)
+                    time_left_seconds = get_time_left_in_seconds(expiry_times[product_code], product_code)
                     days = time_left.days
                     hours = time_left.seconds // 3600
                     minutes = (time_left.seconds % 3600) // 60
                     seconds = time_left.seconds % 60
                     
                     # Display countdown timer
-                    st.metric("**Time Left**", f"{days}d {hours}h {minutes}m ")
+                    display_countdown_js(time_left_seconds, product_code)
 
                     # Handle expired bids
                     if time_left.total_seconds() <= 0:
                         st.warning("Bid expired!")
                         
-                    st_autorefresh(interval=60 * 1000, key="auto-refresh")
+                    
                     
                      # Display highest bids
                 highest_bid = get_highest_bid(product_code)
