@@ -702,13 +702,19 @@ def check_and_reset_expiry(product_code):
     if now >= expiry_times[product_code]:
         expiry_times[product_code] = now + timedelta(days=1)
 
-# Get the remaining time for a product in seconds
-def get_time_left_in_seconds(expiry_time, product_code):
-    check_and_reset_expiry(product_code)  # Check and reset expiry time if necessary
+extension_period = timedelta(hours=72)  
+
+def get_time_left(expiry_time,product_code):    
+    check_and_reset_expiry(product_code)
     now = datetime.now()
     time_left = expiry_time - now
-    return int(time_left.total_seconds())
-
+    if time_left.total_seconds() > 0:
+        return time_left
+    else:
+        # When the countdown reaches zero, reset to a new expiry
+        new_expiry = now + extension_period
+        expiry_times[product_code] = new_expiry  # Update expiry time for this product
+        return new_expiry - now  # Return new countdown
 
 def bids_and_gadgets_page(category_filter=None):
     
@@ -1906,7 +1912,7 @@ def bids_and_gadgets_page(category_filter=None):
                 product_code = gadget["product code"]
                 
                 if product_code in expiry_times:   
-                   time_left = get_time_left_in_seconds(expiry_times[product_code], product_code)
+                   time_left = get_time_left(expiry_times[product_code], product_code)
                    days = time_left.days
                    hours = time_left.seconds // 3600
                    minutes = (time_left.seconds % 3600) // 60
