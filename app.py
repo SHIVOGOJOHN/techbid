@@ -13,7 +13,8 @@ import requests
 from requests.auth import HTTPBasicAuth
 import uuid
 from streamlit_autorefresh import st_autorefresh
-from datetime import datetime, timedelta  # Import directly
+from datetime import timedelta  # Import directly
+import datetime
 import gridfs
 import io
 import random
@@ -622,6 +623,7 @@ def get_time_left1(expiry_time, product_code):
         expiry_times[product_code] = new_expiry  # Update expiry time for this product
         return new_expiry - now  # Return new countdown
         
+st_autorefresh(interval=60 * 1000, key="auto-refresh")       
 expiry_times = {
     "p001": datetime(2024, 10, 11, 12, 0, 0),
     "p002": datetime(2024, 10, 11, 15, 30, 0),
@@ -1917,10 +1919,11 @@ def bids_and_gadgets_page(category_filter=None):
                 #st.write(f"**Product code**: {gadget['product code']}")
                 
                 product_name=gadget["name"]
+                product_code = gadget["product code"]
                 
                 if product_code in expiry_times:   
 
-                    time_left = get_time_left1(expiry_time, product_code)
+                    time_left = get_time_left(expiry_times[product_code], product_code)
                     days = time_left.days
                     hours = time_left.seconds // 3600
                     minutes = (time_left.seconds % 3600) // 60
