@@ -709,9 +709,16 @@ def get_time_left_in_seconds(expiry_time, product_code):
     time_left = expiry_time - now
     return int(time_left.total_seconds())
 
+def get_highest_bid(product_code):
+    return st.session_state.highest_bids.get(product_code, 0)
 
+                # Update the highest bid after each successful bid
+def update_highest_bid(product_code, new_bid):
+    if new_bid > st.session_state.highest_bids[product_code]:
+        st.session_state.highest_bids[product_code] = new_bid 
+        
 # Countdown display using JavaScript
-def display_countdown_js(time_left, product_code):
+def display_countdown_js(time_left, product_code, highest_bid):
     countdown_html = f"""
     <div class="countdown-highest-bid" style="display: inline-block; margin: 0; padding: 0;">
         <div class="countdown-container" style="display: inline-block; margin: 0; padding: 0;">
@@ -719,7 +726,7 @@ def display_countdown_js(time_left, product_code):
             <p id="countdown-{product_code}" class="countdown-timer" style="display: inline-block; margin: 0; padding: 0;"></p>
         </div>
         <div class="highest-bid-container" style="display: inline-block; margin-left: 10px; padding: 0;">
-            <p style="display: inline-block; margin: 0; padding: 0;"><strong>Highest Bid:</strong> KSh {{highest_bid}}</p>
+            <p style="display: inline-block; margin: 0; padding: 0;"><strong>Highest Bid:</strong> KSh {highest_bid}</p>
         </div>
     </div>
     <script>
@@ -743,6 +750,8 @@ def display_countdown_js(time_left, product_code):
     """
     # Embed the HTML/JavaScript into the app
     components.html(countdown_html)
+
+
 def bids_and_gadgets_page(category_filter=None):
     
 
@@ -1939,17 +1948,14 @@ def bids_and_gadgets_page(category_filter=None):
                 product_code = gadget["product code"]
                 
                 if product_code in expiry_times:   
+                   time_left = get_time_left_in_seconds(expiry_times[product_code], product_code)
+                   highest_bid = get_highest_bid(product_code)  # Get the dynamic highest bid
+                   display_countdown_js(time_left, product_code, highest_bid)
 
-                    time_left = get_time_left_in_seconds(expiry_times[product_code], product_code)
-                    display_countdown_js(time_left, product_code)
-                    # Handle expired bids
-                    
+                    # Handle expired bids                   
                     if time_left <= 0:
                         st.warning("Bid expired!")
                         
-                    
-                highest_bid = get_highest_bid(product_code)
-            
                 bid_button_key = f"bid-button-{gadget['product code']}-{idx}-{gadget['name']}"
 
 
