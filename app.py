@@ -3361,7 +3361,6 @@ def category_filter_appliances(code):
 
 
 # Main function to manage the sidebar and page navigation
-@st.cache_data
 def main():
     
     st.write("---")
