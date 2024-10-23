@@ -1915,14 +1915,12 @@ def bids_and_gadgets_page(category_filter=None):
                 st.write(f"**Price**: KSh {gadget['price']}")
                 st.write(f"**Description**: {gadget['description']}")
                 #st.write(f"**Product code**: {gadget['product code']}")
-
-
-                product_code=gadget['product code']
+                
                 product_name=gadget["name"]
                 
                 if product_code in expiry_times:   
 
-                    time_left = get_time_left1(expiry_times[product_code], product_code)
+                    time_left = get_time_left1(expiry_time, product_code)
                     days = time_left.days
                     hours = time_left.seconds // 3600
                     minutes = (time_left.seconds % 3600) // 60
