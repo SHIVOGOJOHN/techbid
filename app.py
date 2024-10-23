@@ -3272,6 +3272,7 @@ To comply with legal obligations.
 We do not sell or rent your personal information to third parties. However, we may share your information with:
 
 **Service Providers**: We may share your information with third-party service providers who help us operate our app, process payments, and provide customer support.
+
 **Legal Requirements**: We may disclose your information if required by law or in response to legal requests.
 """)
     st.title("4.Data Security")
@@ -3281,7 +3282,7 @@ We do not sell or rent your personal information to third parties. However, we m
     st.write("""
 You have the right to:
 
-Access, update, or delete your personal information by [contacting us](techbidmarketplace@gmail.com).
+Access, update, or delete your personal information by contacting us at techbidmarketplace@gmail.com.
 
 Opt out of marketing communications at any time by clicking "unsubscribe" in the emails we send.
 
@@ -3333,7 +3334,7 @@ You agree not to engage in any behavior that disrupts or interferes with the app
     st.title("7.Limitation of Liability")
     st.write("To the fullest extent permitted by law,**TechBid Marketplace** shall not be liable for any damages, losses, or expenses arising out of or in connection with your use of the app, including any technical issues, loss of bids, or unauthorized access to your account.")
     st.title("Contact Us")
-    st.markdown("For inquiries, feel free to [email us](techbidmarketplace@gmail.com).")
+    st.markdown("For inquiries, feel free to email us at techbidmarketplace@gmail.com."
 
 # Categories filters by product code
 
