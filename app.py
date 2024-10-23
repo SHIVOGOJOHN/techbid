@@ -314,7 +314,7 @@ def signup_page():
     if not st.session_state.signup_submitted:
         with st.form(key=st.session_state.signup_form_key):
             name = st.text_input("Full Name")
-            email = st.text_input("Email Address",type='email')
+            email = st.text_input("Email Address")
             password = st.text_input("Password", type='password')
 
             # Additional fields with unique keys
