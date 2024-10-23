@@ -3247,7 +3247,7 @@ def privacy_policy():
     st.write("""
 We collect the following types of information:
 
-**Personal Information*: When you register an account, we may collect personal information such as your name, email address, phone number, and payment information.
+**Personal Information**: When you register an account, we may collect personal information such as your name, email address, phone number, and payment information.
 
 **Bidding Data**: When you participate in an auction, we collect and store information about your bids, including the items you bid on and the amount of your bids.
 
@@ -3257,11 +3257,15 @@ We collect the following types of information:
     st.write("""
 We use the information we collect for the following purposes:
 
--To provide and operate the app and its features (e.g., managing auctions, bids, and payments).
--To communicate with you about your account, auctions, and updates to our services.
--To enhance the user experience by analyzing app usage and trends.
--To process payments and refunds.
--To comply with legal obligations.
+To provide and operate the app and its features (e.g., managing auctions, bids, and payments).
+
+To communicate with you about your account, auctions, and updates to our services.
+
+To enhance the user experience by analyzing app usage and trends.
+
+To process payments and refunds.
+
+To comply with legal obligations.
 """)
     st.title("3.Sharing Your Information")
     st.write("""
@@ -3277,9 +3281,9 @@ We do not sell or rent your personal information to third parties. However, we m
     st.write("""
 You have the right to:
 
--Access, update, or delete your personal information by contacting us at [Your Contact Information].
+Access, update, or delete your personal information by [contacting us] (techbidmarketplace@gmail.com).
 
--Opt out of marketing communications at any time by clicking "unsubscribe" in the emails we send.
+Opt out of marketing communications at any time by clicking "unsubscribe" in the emails we send.
 
 """)
     st.title("6.Cookies")
@@ -3292,7 +3296,7 @@ You have the right to:
     st.write("##")
     st.subheader("Our Terms of Service")
     st.write("---")
-    st.write("Welcome to **TechBid Marketplace** By using the App, you agree to comply with and be bound by the following terms and conditions. Please read these terms carefully.")
+    st.write("By using the App, you agree to comply with and be bound by the following terms and conditions. Please read these terms carefully.")
     st.title("1.Acceptance of Terms") 
     st.write("""By accessing and using our app, you agree to be bound by these terms of service and our privacy policy. If you do not agree with any part of these terms, please do not use the app.""")        
     st.title("2.User Accounts") 
@@ -3311,7 +3315,7 @@ You have the right to:
                 """)  
     
     st.title("4.Payments")
-    st.write("All payments must be made through the payment options provided on our website(e.g., M-Pesa, Ko-fi). We do not store payment information on our servers.")
+    st.write("All payments must be made through the payment options provided on our website.")
     
     st.title("5.User Conduct")
     st.write("""
@@ -3327,7 +3331,7 @@ You agree not to engage in any behavior that disrupts or interferes with the app
     st.write("All content, logos, and other intellectual property associated with the app are the property of **TechBid Marketplace**. You are not permitted to reproduce or use any materials from the app without our written consent.")
     
     st.title("7.Limitation of Liability")
-    st.write("To the fb9ullest extent permitted by law,**TechBid Marketplace** shall not be liable for any damages, losses, or expenses arising out of or in connection with your use of the app, including any technical issues, loss of bids, or unauthorized access to your account.")
+    st.write("To the fullest extent permitted by law,**TechBid Marketplace** shall not be liable for any damages, losses, or expenses arising out of or in connection with your use of the app, including any technical issues, loss of bids, or unauthorized access to your account.")
     st.title("Contact Us")
     st.markdown("For inquiries, feel free to [email us](techbidmarketplace.com).")
 
