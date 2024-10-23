@@ -12,11 +12,7 @@ import numpy as np
 import requests
 from requests.auth import HTTPBasicAuth
 import uuid
-import altair as alt 
-from mysql.connector import Error
 from datetime import datetime, timedelta  # Import directly
-import joblib
-from sklearn.preprocessing import LabelEncoder
 import gridfs
 import io
 import random
@@ -30,25 +26,8 @@ st.set_page_config(page_title="Techbid Marketplace")
 
 
 
-
-# Function to generate a unique referral code
-def generate_referral_code():
-    return ''.join(random.choices(string.ascii_letters + string.digits, k=6))
-
-
- #Prediction function
-def predict_win_probability(input_data):
-    # Convert input data to a DataFrame
-    input_df = pd.DataFrame([input_data])
-
-    # Apply the preprocessor to handle categorical features
-    input_df_transformed = preprocessor.transform(input_df)
-
-    # Make a prediction
-    prediction = model.predict(input_df_transformed)
-    return prediction
-
 # Function to generate custom product IDs based on the ranges provided
+@st.cache_data
 def generate_product_id():
     prefixes = {
         'p': range(1, 21),     # p001 to p020
@@ -74,17 +53,8 @@ if 'current_page' not in st.session_state:
     st.session_state.current_page = 'Home'
 
 
-
-# Load assets
-image1 = r"C:\Users\A\Downloads\Untitled design.png"
-
-
-
-# Initialize PesaPal class for authentication and order submission
-
-
-
 # Function to send confirmation email using Gmail SMTP
+@st.cache_data
 def send_confirmation_email(email, name):
     try:
         # Set up the email server
@@ -118,6 +88,7 @@ def send_confirmation_email(email, name):
 
 
 # Function to send email
+@st.cache_data
 def send_email(to_email, from_email, subject, message):
     try:
         # Set up your SMTP server
@@ -145,6 +116,7 @@ def send_email(to_email, from_email, subject, message):
         return None
 
 # Function to display the customer support form
+@st.cache_data
 def customer_support_page():
     st.title("Customer Support")
 
@@ -186,10 +158,12 @@ def customer_support_page():
 
 
 # Function to hash passwords
+@st.cache_data
 def hash_password(password):
     return hashlib.sha256(password.encode()).hexdigest()
 
 # Function to save new user data into the MySQL database
+@st.cache_data
 def save_user_data(name, email, password, phone, address):
     try:
         # Connect to the MySQL database
@@ -228,62 +202,7 @@ def save_user_data(name, email, password, phone, address):
         st.error("An error occurred. Please check your internet connection and try again.")
 
 
-
-# Add item to cart and save it in MySQL
-
-
-def load_cart(email):
-    try:
-        connection = mysql.connector.connect(
-            charset="utf8mb4",
-            connection_timeout=10,
-            database="defaultdb",
-            host="mysql-f3601b9-jonesjorney-bd4e.f.aivencloud.com",
-            password="AVNS_ERXe8j5gIX5yis97hnw",
-            port=21038,
-            user="avnadmin"
-        )
-        cursor = connection.cursor()
-        cursor.execute("SELECT product_name, bid_amount, quantity FROM cart WHERE email = %s", (email,))
-        cart_items = cursor.fetchall()
-
-        cursor.close()
-        connection.close()
-
-        return cart_items
-    except mysql.connector.Error:
-        st.error("Error loading cart.")
-        return []
-
-def add_to_cart(Fname, Lname, email, product_code, product_name, bid_amount):
-    try:
-        connection = mysql.connector.connect(
-            charset="utf8mb4",
-            connection_timeout=10,
-            database="defaultdb",
-            host="mysql-f3601b9-jonesjorney-bd4e.f.aivencloud.com",
-            password="AVNS_ERXe8j5gIX5yis97hnw",
-            port=21038,
-            user="avnadmin"
-        )
-        cursor = connection.cursor()
-
-        # Insert item into cart or update quantity if it already exists
-        cursor.execute("""
-            INSERT INTO cart (product_code, Fname, Lname, email, product_name, bid_amount, quantity) 
-            VALUES (%s, %s, %s, %s, %s, %s, 1)
-            ON DUPLICATE KEY UPDATE quantity = quantity + 1
-        """, (product_code, Fname, Lname, email, product_name, bid_amount))
-
-        connection.commit()
-        cursor.close()
-        connection.close()
-
-        st.success(f"{product_name} added to cart!")
-    except mysql.connector.Error:
-        st.error("Error adding item to cart.")
-
-               
+ @st.cache_data              
 def verify_user(email, password):
     try:
         connection = mysql.connector.connect(
@@ -346,26 +265,6 @@ def login_page():
             st.error("Invalid email or password.")
 
 
-
-# Cart page (show cart items after login)
-def cart_page():
-    st.title("Your Cart")
-
-    if "user" in st.session_state:
-        email = st.session_state.user["email"]
-        cart_items = load_cart(email)
-
-        if cart_items:
-            st.write("Items in your cart:")
-            for item in cart_items:
-                product_name, bid_amount, quantity = item
-                st.write(f"Product: {product_name}, Bid Amount: {bid_amount}, Quantity: {quantity}")
-        else:
-            st.write("Your cart is empty.")
-    else:
-        st.error("Please log in to view your cart.")
-
-
 # Add CSS to style the "Sign Up" button
 st.markdown(
     """
@@ -408,7 +307,7 @@ st.markdown(
 )
 
 
-
+@st.cache_data
 def signup_page():
     st.title("Sign Up for TechBid")
 
@@ -443,87 +342,14 @@ def signup_page():
                     # Call the function to save user data to MySQL (replace with actual save logic)
                     save_user_data(name, email, password, phone, address)
 
-
-def view_cart():
-    # Example of viewing the cart
-    if st.title("View Cart"):
-        if "user" in st.session_state:
-            user_id = st.session_state.user["id"]
-            cart_items = load_cart(email)
-            if cart_items:
-                total = 0
-                for item in cart_items:
-                    st.write(f"{item[0]} - Ksh{item[1]} (x{item[2]})")
-                    total += item[1] * item[2]
-                st.write(f"**Total: Ksh{total}**")
-            else:
-                st.write("Your cart is empty.")
-        else:
-            st.error("Please log in to view your cart.")
-
-       
-             
-
-
-
-
 # Function to display the home page
 def home_page():
     st.write("")
-
-def bid_history():
-    st.title("Bid History")
-
-    # Sample data with specific values for bids
-    data2 = pd.DataFrame({
-        'Time': pd.date_range('2024-09-25', periods=10),
-        'Bids': [10, 25, 35, 15, 50, 45, 30, 20, 55, 40]  # Insert your specific values here
-    })
-
-    # Create an Altair chart using raw Vega-Lite specifications to disable the actions
-    chart = alt.Chart(data2).mark_line().encode(
-        x='Time:T',
-        y='Bids:Q'
-    ).properties(
-        width=600,
-        height=300
-    ).to_dict()
-
-    # Embed the Vega-Lite spec without the action buttons
-    st.vega_lite_chart(chart, use_container_width=True)
-
-
-    data = pd.DataFrame({
-    'Time': pd.date_range('2024-09-25', periods=10),
-    'Bids': [10, 18, 9, 12, 50, 45, 32, 20, 65, 41],
-    'Winners': [6, 11, 3, 5, 21, 33, 17, 8, 33, 13]
-})
-
-# Melt the DataFrame to long format
-    data_melted = data.melt('Time', var_name='Category', value_name='Count')
-
-    # Altair line chart
-    chart = alt.Chart(data_melted).mark_line().encode(
-        x='Time:T',
-        y='Count:Q',
-        color='Category:N'
-    ).properties(
-        title="Bids and Winners Over Time"
-    )
-
-    st.altair_chart(chart, use_container_width=True)
-    if st.checkbox("View Raw Data"):
-        st.write(data)
-
-
 
 # Function to display Bids and Gadgets page
 # Initialize session state for each gadget to track if the form should be displayed
 if "show_payment_form" not in st.session_state:
     st.session_state.show_payment_form = {}
-   
-    
-
    
 # Pesapal class from your code
 class PesaPal:
@@ -694,7 +520,7 @@ st.markdown(
 </style>
 """, unsafe_allow_html=True)
  
-
+@st.cache_data
 def save_bid(Fname, Lname, email, phone, bid_amount, product_code,product_name):
     try:
             
@@ -738,6 +564,7 @@ def save_bid(Fname, Lname, email, phone, bid_amount, product_code,product_name):
 
             
 ###########################################################
+@st.cache_data
 def send_confirmation(email, Fname, Lname, bid_amount, product_name):
     sender_email = 'techbidmarketplace@gmail.com'
     sender_password = "vnot dyyh plrw syag"  # Use app-specific password or environment variable for security
@@ -874,28 +701,9 @@ expiry_times = {
 extension_period = timedelta(hours=72)  
 
 
-def get_time_left(expiry_time, product_code):
-    now = datetime.now()
-    
-    # Check if the product code exists in the expiry_times dictionary
-    if product_code not in expiry_times:
-        # Set a default expiry time if product_code is not found
-        expiry_times[product_code] = now + extension_period
-    
-    # Fetch the expiry time
-    expiry_time = expiry_times[product_code]
-    time_left = expiry_time - now
-    
-    # If time is still left, return it
-    if time_left.total_seconds() > 0:
-        return time_left
-    else:
-        # When the countdown reaches zero, reset to a new expiry
-        new_expiry = now + extension_period
-        expiry_times[product_code] = new_expiry  # Update expiry time for this product
-        return new_expiry - now  # Return new countdown
 
 #########################################
+@st.cache_data
 def bids_and_gadgets_page(category_filter=None):
     
 
@@ -2058,7 +1866,7 @@ def bids_and_gadgets_page(category_filter=None):
     def update_highest_bid(product_code, new_bid):
         if new_bid > st.session_state.highest_bids[product_code]:
             st.session_state.highest_bids[product_code] = new_bid 
-
+     
     # Simulate random bid increase between 1 and 10
     def simulate_random_bids():
         for product_code in st.session_state.highest_bids.keys():
@@ -2067,6 +1875,26 @@ def bids_and_gadgets_page(category_filter=None):
             update_highest_bid(product_code, new_highest_bid)      
     
     simulate_random_bids()
+    def get_time_left(expiry_time, product_code):
+        now = datetime.now()
+        
+        # Check if the product code exists in the expiry_times dictionary
+        if product_code not in expiry_times:
+            # Set a default expiry time if product_code is not found
+            expiry_times[product_code] = now + extension_period
+        
+        # Fetch the expiry time
+        expiry_time = expiry_times[product_code]
+        time_left = expiry_time - now
+        
+        # If time is still left, return it
+        if time_left.total_seconds() > 0:
+            return time_left
+        else:
+            # When the countdown reaches zero, reset to a new expiry
+            new_expiry = now + extension_period
+            expiry_times[product_code] = new_expiry  # Update expiry time for this product
+            return new_expiry - now  # Return new countdown
 
     # Display products in columns and rows
     for idx, gadget in enumerate(filtered_gadgets):
@@ -2191,6 +2019,7 @@ def bids_and_gadgets_page(category_filter=None):
 
 
 #search Engine
+@st.cache_data
 def search_bar():
     gadgets = [
         {
@@ -3295,48 +3124,8 @@ def search_bar():
 
             
 
-        
- # Countdown logic
-def countdown():
-
-    # Set your countdown date (modify this as needed)
-    countdown_time = datetime.datetime(2024, 10, 10, 0, 0, 0)
-
-    # Create a placeholder for the countdown
-    countdown_placeholder = st.empty()
-
-    while True:
-        # Get the current time
-        current_time = datetime.datetime.now()
-
-        # Calculate the time difference between now and the countdown time
-        time_left = countdown_time - current_time
-
-        # If the countdown has ended, stop the loop
-        if time_left.total_seconds() <= 0:
-            countdown_placeholder.markdown("### Auction Started!")
-            break
-
-        # Format the time left as H:M:S
-        time_left_str = str(time_left).split('.')[0]
-
-        # Display the countdown in the placeholder
-        countdown_placeholder.markdown(f"### Time Left for the Next Auction: {time_left_str}")
-
-        # Wait for 1 second before updating the countdown again
-        time.sleep(1)
-
-
 def section_off_page():
     st.write("")  # Blank content   
-
-
-# Function for file upload
-def file_upload():
-    st.write("---")
-
-    
-
 
 st.markdown(
         """
@@ -3349,13 +3138,14 @@ st.markdown(
         """,
         unsafe_allow_html=True
     ) 
-
+@st.cache_data
 def generate_random_metrics():
         highest_bid = random.randint(100, 40000)  # Random highest bid between 1 and 100
         total_bids = random.randint(50, 200)  # Random total number of bids between 50 and 200
         return highest_bid, total_bids
 
 # Function to update the user count and delta
+@st.cache_data
 def update_user_metrics():
     if "users_count" not in st.session_state:
         st.session_state.users_count = 2103  # Initial users count
@@ -3363,6 +3153,7 @@ def update_user_metrics():
 
     st.session_state.users_count += random.randint(1, 4)  # Increment users randomly
     st.session_state.users_delta = f"+{random.randint(1, 4)}%"  # Update delta randomly
+    
 
 def how_works():
 
@@ -3414,7 +3205,7 @@ For any inquiries regarding shipping and logistics, feel free to contact our sup
 
              
 """)
-
+@st.cache_data
 def about_us():
     st.subheader("About Us")
 # Css for the about page 
@@ -3554,21 +3345,23 @@ You agree not to engage in any behavior that disrupts or interferes with the app
     st.markdown("For inquiries, feel free to [email us](techbidmarketplace.com).")
 
 # Categories filters by product code
+@st.cache_data
 def category_filter_phones_tablets(code):
     return code.startswith('p') or code.startswith('t')
-
+@st.cache_data
 def category_filter_computing(code):
     return code.startswith('c')
-
+@st.cache_data
 def category_filter_tv_audio(code):
     return code.startswith('s')
-
+@st.cache_data
 def category_filter_appliances(code):
     return code.startswith('a')
 
 
 
 # Main function to manage the sidebar and page navigation
+@st.cache_data
 def main():
     
     st.write("---")
@@ -3672,22 +3465,22 @@ def main():
         if items != "Exit This Section":
             st.session_state.active_section = "categories"
             if items == "Phones and Tablets":
-                st.write("### Phones and Tablets")
+                st.write("**Phones and Tablets**")
                 bids_and_gadgets_page(category_filter_phones_tablets)
 
             elif items == "TV and Audio":
-                st.write("###TV and Audio")
+                st.write("**TV and Audio**")
                 bids_and_gadgets_page(category_filter_tv_audio)
 
             elif items == "Appliances":
-                st.write("###Appliances")
+                st.write("**Appliances**")
                 bids_and_gadgets_page(category_filter_appliances)
 
             elif items == "Computing":
-                st.write("###Computing")
+                st.write("**Computing**")
                 bids_and_gadgets_page(category_filter_computing)
         else:
-            st.write("### Please select a category from the sidebar to view available products.")
+            st.write("**Please select a category from the sidebar to view available products.**")
 
     
     st.sidebar.write("---")  
