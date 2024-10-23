@@ -703,7 +703,7 @@ extension_period = timedelta(hours=72)
 
 
 #########################################
-@st.cache_data
+
 def bids_and_gadgets_page(category_filter=None):
     
 
