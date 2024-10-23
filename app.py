@@ -1951,21 +1951,22 @@ def bids_and_gadgets_page(category_filter=None):
                    time_left = get_time_left_in_seconds(expiry_times[product_code], product_code)
                    highest_bid = get_highest_bid(product_code)  # Get the dynamic highest bid
                    display_countdown_js(time_left, product_code, highest_bid)
-
-                   # Adjusting spacing between JavaScript section and bid button
-                st.write("")  # Empty string to remove auto spacing   
                     
-                bid_button_key = f"bid-button-{gadget['product code']}-{idx}-{gadget['name']}"
-                st.markdown(
-                    f"""
-                    <div style="padding-top: 5px; margin: 0;">
-                        <form action="">
-                            <input type="number" style="width: 100%;" placeholder="Enter bid amount">
-                        </form>
-                    </div>
-                    """,
-                    unsafe_allow_html=True
-                )
+                   #Remove extra spacing between JavaScript section and bid button
+                   st.markdown('<div style="margin: 0; padding: 0;"></div>', unsafe_allow_html=True) 
+                
+                   bid_button_key = f"bid-button-{gadget['product code']}-{idx}-{gadget['name']}"
+                   # Display the number input without placeholder
+                   st.markdown(
+                        f"""
+                        <div style="padding-top: 5px; margin: 0;">
+                            <form action="">
+                                <input type="number" style="width: 100%; margin: 0; padding: 0;" min="{gadget['price']}" value="{gadget['price']}">
+                            </form>
+                        </div>
+                        """,
+                        unsafe_allow_html=True
+                    )
 
 
                 # Toggle form visibility when button is clicked
