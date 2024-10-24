@@ -3376,7 +3376,7 @@ def main():
         }
         </style>
     """, unsafe_allow_html=True)
-        st.write("---")
+        
  
     with st.container():
         image_column, text_column = st.columns((1, 1))
