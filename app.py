@@ -190,7 +190,7 @@ def save_user_data(name, email, password, phone, address):
 
         st.success("User registered successfully! You can now Bid.")
     except mysql.connector.Error :
-        st.error("Check your email or internet connection and try again ")
+        st.error("Email already registered! Use another email address. ")
     except Exception as e:
         st.error(f"An error occured. Check your connection and try again")
 def verify_user(email, password):
@@ -3126,7 +3126,7 @@ st.markdown(
     ) 
 
 def generate_random_metrics():
-        highest_bid = random.randint(100, 40000)  # Random highest bid between 1 and 100
+        highest_bid = random.randint(100, 2199)  # Random highest bid between 1 and 100
         total_bids = random.randint(50, 200)  # Random total number of bids between 50 and 200
         return highest_bid, total_bids
 
