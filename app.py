@@ -191,11 +191,10 @@ def save_user_data(name, email, password, phone, address):
         connection.close()
 
         st.success("User registered successfully! You can now Bid.")
-    except mysql.connector.Error:
-        st.error("Check your email or internet connection and try again.")
+    except mysql.connector.Error as e:
+        st.error(f"Database error: {str(e)}")
     except Exception as e:
-        st.error("An error occurred. Please check your internet connection and try again.")
-
+        st.error(f"Unexpected error: {str(e)}")
 def verify_user(email, password):
     try:
         connection = mysql.connector.connect(
