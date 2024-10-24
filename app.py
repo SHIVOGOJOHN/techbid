@@ -699,7 +699,7 @@ def check_and_reset_expiry(product_code):
     if now >= expiry_times[product_code]:
         expiry_times[product_code] = now + timedelta(days=1)
 
-extension_period = timedelta(hours=72)  
+extension_period = timedelta(hours=24)  
 
 def get_time_left(expiry_time,product_code):    
     check_and_reset_expiry(product_code)
