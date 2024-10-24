@@ -8,5 +8,4 @@ joblib
 scikit-learn
 pymongo
 uuid
-email
-smtplib
+
