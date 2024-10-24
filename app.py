@@ -3409,7 +3409,7 @@ def main():
             st.markdown('<div class="bounce">Bid Now for Amazing Deals!</div>', unsafe_allow_html=True)
             st.write("Welcome to **TechBid Marketplace**, the ultimate destination for scoring the best deals on the latest mobile and computer gadgets! Whether you're hunting for a sleek smartphone or a powerful laptop, you can join the bidding action, compete for top tech, and grab your favorite devices at unbeatable prices. Start bidding now and discover how you can upgrade your tech for less!")
             if st.button("Join TechBid Now!", key="primary"):
-                st.success("**Sign Up from the sidebar**")
+                st.success("**Click the top left sidebar button (>) to Sign Up**")
                 st.session_state.current_page = "Home" 
             st.write("---")
     
