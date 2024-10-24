@@ -1,11 +1,6 @@
-streamlit
-mysql-connector-python
-pandas
-numpy
-requests
-altair
-joblib
-scikit-learn
-pymongo
-uuid
-
+streamlit==1.39.0
+mysql-connector-python==9.1.0
+pandas==2.2.3
+numpy==2.1.2
+requests==2.32.3
+uuid==1.30  # If required for some specific usage (standard in Python, but listed here for completeness)
