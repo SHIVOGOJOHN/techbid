@@ -173,8 +173,6 @@ def save_user_data(name, email, password, phone, address):
         )
         cursor = connection.cursor()
 
-        referral_code = generate_referral_code()
-
         # Hash the password before storing
         hashed_password = hash_password(password)
       
@@ -191,10 +189,10 @@ def save_user_data(name, email, password, phone, address):
         connection.close()
 
         st.success("User registered successfully! You can now Bid.")
-    except mysql.connector.Error as e:
-        st.error(f"Database error: {str(e)}")
+    except mysql.connector.Error :
+        st.error("Check your email or internet connection and try again ")
     except Exception as e:
-        st.error(f"Unexpected error: {str(e)}")
+        st.error(f"An error occured. Check your connection and try again")
 def verify_user(email, password):
     try:
         connection = mysql.connector.connect(
