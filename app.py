@@ -3350,8 +3350,33 @@ def category_filter_appliances(code):
 
 # Main function to manage the sidebar and page navigation
 def main():
+    # Custom CSS for styling the selectbox
+    st.markdown("""
+        <style>
+        /* Style for the selectbox */
+        .stSelectbox [data-baseweb="select"] {
+            background-color: #f0f0f5;
+            border: 2px solid #4CAF50;
+            color: #333;
+            font-size: 16px;
+            border-radius: 5px;
+            padding: 5px;
+        }
+        
+        /* Style for the sidebar */
+        .css-1d391kg {
+            background-color: #e6e6e6;
+        }
     
-    st.write("---")
+        /* Style for the label of the selectbox */
+        .stSelectbox label {
+            font-weight: bold;
+            font-size: 18px;
+            color: #4CAF50;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+        st.write("---")
  
     with st.container():
         image_column, text_column = st.columns((1, 1))
@@ -3410,7 +3435,7 @@ def main():
     st.sidebar.write("---")
 
     # Sidebar to toggle between navigation and categories
-    toggle_option = st.sidebar.selectbox("Select View", ["Navigation", "Categories"])
+    toggle_option = st.sidebar.selectbox("Select Categories", ["Navigation", "Categories"])
 
     if toggle_option == "Navigation":
         st.session_state.active_section = "navigation"
