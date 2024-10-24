@@ -14,7 +14,6 @@ from requests.auth import HTTPBasicAuth
 import uuid
 from mysql.connector import Error
 from datetime import datetime, timedelta  # Import directly
-import gridfs
 import io
 import random
 import pathlib
