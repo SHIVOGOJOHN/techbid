@@ -3474,7 +3474,7 @@ def main():
         categories=["Exit This Section","Phones and Tablets", "TV and Audio", "Appliances", "Computing"]
         items = st.sidebar.selectbox("**● SELECT CATEGORY**", categories)
 
-        if items != "Exit This Section":
+        if items != "Select Categories":
             st.session_state.active_section = "categories"
             if items == "Phones and Tablets":
                 st.write("**Phones and Tablets**")
