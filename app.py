@@ -3435,7 +3435,7 @@ def main():
     st.sidebar.write("---")
 
     # Sidebar to toggle between navigation and categories
-    toggle_option = st.sidebar.selectbox("Select Categories", ["Navigation", "Categories"])
+    toggle_option = st.sidebar.selectbox("SELECT VIEW", ["Navigation", "Categories"])
 
     if toggle_option == "Navigation":
         st.session_state.active_section = "navigation"
