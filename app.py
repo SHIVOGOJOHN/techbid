@@ -258,7 +258,7 @@ st.markdown(
     <style>
     /* Styling for the Sign Up button */
     .stButton > button {
-        background-color: #4CAF50; /* Green background color */
+        background-color: #62d766; /* Green background color */
         color: white; /* White text color */
         border: none; /* Remove default border */
         border-radius: 10px; /* Rounded corners */
@@ -455,7 +455,7 @@ st.markdown(
     """
     <style>
     div.stButton > button {
-        background-color:#126fe8;  /* Button background color */
+        background-color:#62d766;  /* Button background color */
         color: #020202;  /* Button text color */
         border-radius: 10px;
         border: 2px solid #126fe8;
@@ -465,13 +465,13 @@ st.markdown(
         animation: bounce 5s infinite;
     }
     div.stButton > button:hover {
-        background-color: #d64f6e;  /* No change on hover */
+        background-color: #62d766;  /* No change on hover */
         border-color: #d64f6e;      /* No change on hover */
-        color: #020202;             /* No change on hover */
+        color: #020202; 
     }
     div.stButton > button:active {
-        background-color: #d64f6e;  /* No change on click */
-        border-color: #d64f6e;      /* No change on click */
+        background-color: #62d766;  /* No change on click */
+        border-color: #62d766;      /* No change on click */
         color: #020202;             /* No change on click */
     }
     </style>
