@@ -458,7 +458,7 @@ st.markdown(
         background-color:#62d766;  /* Button background color */
         color: #020202;  /* Button text color */
         border-radius: 10px;
-        border: 2px solid #126fe8;
+        border: 2px solid #62d766;
         padding: 8px 16px;
         font-size: 16px;
         cursor: pointer;
