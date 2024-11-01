@@ -684,7 +684,7 @@ expiry_times = {
 }
 
 # Set the expiration date to 1st December 2024
-expiry_date = datetime(2024, 10, 30, 0, 0, 0)
+expiry_date = datetime(2024, 11, 02, 0, 0, 0)
 
 # Update the expiry_times dictionary
 expiry_times = {key: expiry_date for key in expiry_times.keys()}
