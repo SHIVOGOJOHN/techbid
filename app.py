@@ -1921,7 +1921,7 @@ def bids_and_gadgets_page(category_filter=None):
     
                      # Display highest bids
                 highest_bid = get_highest_bid(product_code)
-                st.write(f"**Highest Bid** : KSh {highest_bid}")
+                #st.write(f"**Highest Bid** : KSh {highest_bid}")
                 
                 bid_button_key = f"bid-button-{gadget['product code']}-{idx}-{gadget['name']}"   
                 # Toggle form visibility when button is clicked
