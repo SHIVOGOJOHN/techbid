@@ -3395,8 +3395,8 @@ def main():
     if "current_page" not in st.session_state:
         st.session_state.current_page = "Home"
 
-    update_user_metrics()
-    st.sidebar.metric(label="Users", value=st.session_state.users_count, delta=st.session_state.users_delta)
+    #update_user_metrics()
+    #st.sidebar.metric(label="Users", value=st.session_state.users_count, delta=st.session_state.users_delta)
 
     # Create two columns in the sidebar for other metrics
     #col1, col2 = st.sidebar.columns(2)
@@ -3409,7 +3409,7 @@ def main():
     #st.sidebar.write("---")
 
     # Sidebar to toggle between navigation and categories
-    toggle_option = st.sidebar.selectbox(["Navigation", "Categories"])
+    toggle_option = st.sidebar.selectbox('**Select Option**', ["Navigation", "Categories"])
 
     if toggle_option == "Navigation":
         st.session_state.active_section = "navigation"
