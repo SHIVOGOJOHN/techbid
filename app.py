@@ -159,7 +159,7 @@ def hash_password(password):
     return hashlib.sha256(password.encode()).hexdigest()
 
 # Function to save new user data into the MySQL database
-def save_user_data(name, email, password, phone, address):
+def save_user_data(name, email, password, phone, address,location):
     try:
         # Connect to the MySQL database
         connection = mysql.connector.connect(
@@ -177,8 +177,8 @@ def save_user_data(name, email, password, phone, address):
         hashed_password = hash_password(password)
       
         # Insert the user data into the database
-        cursor.execute("INSERT INTO users (name, email, password, phone, address  ) VALUES (%s, %s, %s, %s, %s)",
-                       (name, email, hashed_password, phone, address))
+        cursor.execute("INSERT INTO users (name, email, password, phone, address,location ) VALUES (%s, %s, %s, %s, %s, %s)",
+                       (name, email, hashed_password, phone, address,location))
         connection.commit()
 
          # Send email confirmation
@@ -1890,7 +1890,43 @@ def bids_and_gadgets_page(category_filter=None):
 
 # Append the gadget info to the current row
         rows[-1].append(gadget)
+    g4s_locations = [
+    {"center": "Nairobi Central", "location": "Nairobi"},
+    {"center": "Mombasa Center", "location": "Mombasa"},
+    {"center": "Kisumu Hub", "location": "Kisumu"},
+    {"center": "Eldoret Depot", "location": "Eldoret"},
+    {"center": "Nakuru Office", "location": "Nakuru"},
+    {"center": "Mama Ngina Street", "location": "Nairobi"},
+    {"center": "Courier Head Office", "location": "Nairobi"},
+    {"center": "Nyerere Road", "location": "Mombasa"},
+    {"center": "Likoni", "location": "Mombasa"},
+    {"center": "Cinemax Complex", "location": "Mombasa"},
+    {"center": "Bungoma Branch", "location": "Bungoma"},
+    {"center": "Busia Branch", "location": "Busia"},
+    {"center": "Diani Branch", "location": "Diani"},
+    {"center": "Malava", "location": "Kakamega"},
+    {"center": "Kakamega Main", "location": "Kakamega"},
+    {"center": "Eldoret Main", "location": "Eldoret"},
+    {"center": "Kericho Branch", "location": "Kericho"},
+    {"center": "Embu Office", "location": "Embu"},
+    {"center": "Karatina Branch", "location": "Karatina"},
+    {"center": "Kilifi Branch", "location": "Kilifi"},
+    {"center": "Kisii Branch", "location": "Kisii"},
+    {"center": "Kitale Branch", "location": "Kitale"},
+    {"center": "Limuru Branch", "location": "Limuru"},
+    {"center": "Machakos Branch", "location": "Machakos"},
+    {"center": "Meru Branch", "location": "Meru"},
+    {"center": "Homa Bay", "location": "Homa Bay"},
+    {"center": "Mbita", "location": "Homa Bay"},
+    {"center": "Kapsabet Branch", "location": "Kapsabet"},
+    {"center": "Kerugoya Branch", "location": "Kerugoya"},
+    {"center": "Malindi Branch", "location": "Malindi"},
+    {"center": "Malindi Office", "location": "Malindi"},
+    {"center": "Mombasa CBD", "location": "Mombasa"},
+    {"center": "Kitui Branch", "location": "Kitui"}
+]
 
+     
     for row in rows:
         cols = st.columns(len(row))  # Create as many columns as gadgets in the row
         for idx, gadget in enumerate(row):
@@ -1957,16 +1993,20 @@ def bids_and_gadgets_page(category_filter=None):
                                 step=1,
                                 key=f"bid-{product_code}"
                             ) 
-                            
+                            # Add a dispatch location dropdown (Selectbox)
+                            location = st.selectbox("Select Dispatch Location", 
+                                                    options=[f"{loc['center']} - {loc['location']}" for loc in g4s_locations],
+                                                    label="Dispatch Location",
+                                                    key=f"location-{product_code}")
                             submit_button = st.form_submit_button("Confirm Bid")            
 
                         if submit_button:
 
                             # Payment initiation with spinner for loading effect
-                            if Fname and Lname and phone and email and product_code and bid_amount and product_name  :
+                            if Fname and Lname and phone and email and product_code and bid_amount and product_name and location:
                                 if bid_amount >= gadget["price"]:
-                                    save_bid(Fname, Lname, email, phone, bid_amount, product_code,product_name)
-                                    send_confirmation(email, Fname, Lname, bid_amount, product_name)
+                                    save_bid(Fname, Lname, email, phone, bid_amount, product_code,product_name,location)
+                                    send_confirmation(email, Fname, Lname, bid_amount, product_name,location)
 
                                     pesapal = PesaPal()
                                     token = pesapal.authentication()
