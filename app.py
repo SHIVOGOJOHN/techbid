@@ -20,7 +20,7 @@ import pathlib
 import string
 
 # Set up page configuration only once
-st.set_page_config(page_title="Techbid Marketplace")
+st.set_page_config(page_title="Techbid Marketplace", layout="wide")
 
 
 
