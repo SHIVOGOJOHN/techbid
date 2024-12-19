@@ -1890,6 +1890,8 @@ def bids_and_gadgets_page(category_filter=None):
 
 # Append the gadget info to the current row
         rows[-1].append(gadget)
+
+    
     g4s_locations = [
     {"center": "Nairobi Central", "location": "Nairobi"},
     {"center": "Mombasa Center", "location": "Mombasa"},
@@ -1996,7 +1998,6 @@ def bids_and_gadgets_page(category_filter=None):
                             # Add a dispatch location dropdown (Selectbox)
                             location = st.selectbox("Select Dispatch Location", 
                                                     options=[f"{loc['center']} - {loc['location']}" for loc in g4s_locations],
-                                                    label="Dispatch Location",
                                                     key=f"location-{product_code}")
                             submit_button = st.form_submit_button("Confirm Bid")            
 
