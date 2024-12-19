@@ -1996,7 +1996,7 @@ def bids_and_gadgets_page(category_filter=None):
                                 key=f"bid-{product_code}"
                             ) 
                             # Add a dispatch location dropdown (Selectbox)
-                            location = st.selectbox("Select Dispatch Location", 
+                            location = st.selectbox("Select G4S Dispatch Location", 
                                                     options=[f"{loc['center']} - {loc['location']}" for loc in g4s_locations],
                                                     key=f"location-{product_code}")
                             submit_button = st.form_submit_button("Confirm Bid")            
@@ -2007,7 +2007,7 @@ def bids_and_gadgets_page(category_filter=None):
                             if Fname and Lname and phone and email and product_code and bid_amount and product_name and location:
                                 if bid_amount >= gadget["price"]:
                                     save_bid(Fname, Lname, email, phone, bid_amount, product_code,product_name,location)
-                                    send_confirmation(email, Fname, Lname, bid_amount, product_name,location)
+                                    send_confirmation(email, Fname, Lname, bid_amount, product_name)
 
                                     pesapal = PesaPal()
                                     token = pesapal.authentication()
