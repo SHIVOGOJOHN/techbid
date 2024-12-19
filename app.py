@@ -508,7 +508,7 @@ st.markdown(
 </style>
 """, unsafe_allow_html=True)
  
-def save_bid(Fname, Lname, email, phone, bid_amount, product_code,product_name):
+def save_bid(Fname, Lname, email, phone, bid_amount, product_code,product_name,location):
     try:
             
             connection = mysql.connector.connect(
@@ -525,11 +525,11 @@ def save_bid(Fname, Lname, email, phone, bid_amount, product_code,product_name):
                 cursor = connection.cursor()
 
             # SQL query to insert bid details into the database
-            query = """INSERT INTO bids (Fname, Lname, email, phone, bid_amount, product_code) 
-                        VALUES (%s, %s, %s, %s, %s, %s)"""
+            query = """INSERT INTO bids (Fname, Lname, email, phone, bid_amount, product_code,location) 
+                        VALUES (%s, %s, %s, %s, %s, %s, %s)"""
 
             # Values to be inserted
-            record = (Fname, Lname, email, phone, bid_amount, product_code)
+            record = (Fname, Lname, email, phone, bid_amount, product_code,location)
 
             # Execute the SQL query
             cursor.execute(query, record)
